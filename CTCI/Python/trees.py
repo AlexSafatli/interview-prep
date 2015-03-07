@@ -64,6 +64,17 @@ def getLevelOrderOfTree(tr):
 	levelList = list()
 	#TODO
 
+# 4.6, First Common Ancestor (in binary tree)
+'''
+Know that: Given some node N, if node p is one side,
+and node r is on the other side, N must be their first
+common ancestor. Start from top of tree and use this
+principle.
+'''
+
+# 4.7, See solution.
+# 4.8, Summed matrix (DP).
+
 if __name__ == '__main__':
 	b = binarySearchTree()
 	b.setRoot(getMidPtOfArrayAsNode(range(2,7),0,5-1))

@@ -97,8 +97,7 @@ class adder(object):
 
 		''' Add values and keep track of carry. '''
 
-		if (a == None and b == None):
-			return None
+		if (a == None and b == None): return None
 		
 		# Make new node.
 		result = node(carry)
