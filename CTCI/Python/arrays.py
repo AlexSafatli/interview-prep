@@ -30,6 +30,20 @@ def areAnagrams(string1,string2):
 		if val != 0: return False
 	return True	
 
+def transposeSquareMatrixInplace(mat):
+	if len(mat) < 1:
+		raise Exception("Empty matrix.")
+	elif len(mat[0]) < 1:
+		raise Exception("Empty row in matrix.")
+	N = len(mat[0])
+	# Only consider upper triangle.
+	for n in xrange(0,N-1):
+		for m in xrange(n+1,N):
+			# Swap the elements at [m][n] and [n][m].
+			temp = mat[m][n]
+			mat[m][n] = mat[n][m]
+			mat[n][m] = temp
+
 # Rotating matrices.
 # - Rotate by +90: transpose, reverse rows.
 # - Rotate by -90: transpose, reverse columns.
@@ -51,3 +65,7 @@ if __name__ == '__main__':
 	print 'Test String A: %s' % (testString)
 	print 'Test String B: door'
 	print 'Anagrams: %s' % (str(areAnagrams(testString,'door')))
+	mat = [[0,1,2],[5,4,3],[9,2,1]]
+	print 'Matrix: %s' % (str(mat))
+	transposeSquareMatrixInplace(mat)
+	print 'Transposed: %s' % (str(mat))
