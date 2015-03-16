@@ -1,3 +1,13 @@
+def fib(n):
+	''' Iterative solution to finding the Nth Fibonacci number. '''
+
+	up,lo = 1,0
+	for x in xrange(0,n):
+		up += lo # high = high added to lo
+		lo = (up-lo) # lo = what high was
+	return lo
+
+
 def isPrime(n):
 	''' Solution extracted from a Project Euler solution of mine. '''
 
