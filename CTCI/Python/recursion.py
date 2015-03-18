@@ -60,6 +60,29 @@ def test_allPermutations():
 	s = 'Dark'
 	print allPermutations([],s)
 
+# 8.5 All valid combinations of n-pairs of parantheses "( ... )".
+
+def parantheses(l,r,cnt,strarr,coll):
+	if (l == 0 and r == 0):
+		coll.append(''.join(strarr))
+		return # Done.
+	if (l > 0): # Some left "(" to place.
+		strarr[cnt] = '('
+		parantheses(l-1,r,cnt+1,strarr,coll)
+	if (r > l):
+		strarr[cnt] = ')'
+		parantheses(l,r-1,cnt+1,strarr,coll)
+
+def allParanthesesFor(n):
+	arr = ['*' for x in xrange(2*n)]
+	li = list()
+	parantheses(n,n,0,arr,li)
+	print '\n'.join(li)
+
+# 8.6 "Bleed outwards": get old color, get x,y color, compare, and if same, continue.
+# 8.7
+# 8.8
+
 if __name__ == '__main__':
 	test_allSubsets()
 	test_allPermutations()
