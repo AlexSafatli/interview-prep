@@ -30,3 +30,11 @@ def swapinPlace(a,b):
     return a,b
 
 # 19.3 (pg 268); determine number of zeroes in n factorial by counting multiples of 5.
+
+# 20.1 (pg 279); add two numbers NOT using any arithmetic operators.
+def addNoArithmeticOperators(a,b):
+	if (b == 0): return a
+	sumNoCarry = a ^ b # No carry.
+	carry = (a & b) << 1 # Carry (do not add).
+	return addNoArithmeticOperators(sumNoCarry,carry) # Recurse.
+
