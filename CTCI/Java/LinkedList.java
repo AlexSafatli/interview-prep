@@ -15,6 +15,20 @@ public class LinkedList<T> {
 		return size;
 	}
 
+	public Node<T> appendToHead(T data) {
+		Node<T> n = new Node<T>(data);
+		appendNodeToHead(n);
+		return n;
+	}
+
+	public void appendNodeToHead(Node<T> node) {
+		if (head != null) {
+			node.setNext(head);
+		}
+		head = node;
+		++size;
+	}
+
 	public Node<T> getTail() {
 		Node<T> cursor = getHead();
 		if (cursor == null) return null;
