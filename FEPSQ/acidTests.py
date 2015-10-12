@@ -30,5 +30,6 @@ if __name__ == '__main__':
   print 'Reversed: %15s' % (reverseString(s))
   print '\nNth Fibonacci Number:'
   for n in xrange(0,10+1): print '\tN = %3d -> %3d' % (n,fibIterative(n))
+  print '\tN = %3d -> %3d' % (25,fibIterative(25))
   print '\nMultiplication Table (up to 12*12):'
   printMultiplicationTables(12)
