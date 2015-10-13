@@ -7,6 +7,11 @@ public class LinkedList<T> {
 		head = null;
 	}
 
+	public LinkedList(T[] arr) {
+		super();
+		for (int i = 0; i < arr.length; ++i) add(arr[i]);
+	}
+
 	public Node<T> getHead() {
 		return head;
 	}
@@ -44,6 +49,10 @@ public class LinkedList<T> {
 		return n;
 	}
 
+	public Node<T> add(T data) {
+		return appendToTail(data);
+	}
+
 	public void appendNodeToTail(Node<T> node) {
 		if (head == null) head = node;
 		else {
@@ -74,10 +83,14 @@ public class LinkedList<T> {
 	}
 
 	public static void main(String[] args) {
+		Integer[] arr = { 3, 4, 5 };
 		LinkedList<Integer> intList = new LinkedList<Integer>();
-		intList.appendToTail(2);
-		intList.appendToTail(10);
+		intList.add(2);
+		intList.add(10);
+		intList.appendToHead(8);
 		intList.deleteNode(intList.getTail());
+		System.out.println(intList.getSize());
+		intList = new LinkedList<Integer>(arr);
 		System.out.println(intList.getSize());
 	}
 
