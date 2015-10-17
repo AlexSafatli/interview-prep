@@ -99,9 +99,8 @@ public class LinkedList<T> {
 		Node<T> cursor = head;
 		while (cursor != null) {
 			str += cursor.getData().toString();
-			if (cursor.getNext() != null) {
-				str += " ";
-			}
+			if (cursor.getNext() != null) str += " ";
+			cursor = cursor.getNext();
 		}
 		return str;
 	}
@@ -113,11 +112,12 @@ public class LinkedList<T> {
 		intList.appendToHead(98);
 		intList.appendToHead(99);
 		intList.appendToHead(100);
-		System.out.println(intList.removeHead());
-		System.out.println(intList.removeTail());
+		System.out.println("List: " + intList);
+		System.out.println("Removing Head: " + intList.removeHead());
+		System.out.println("Removing Tail: " + intList.removeTail());
 		intList.deleteNode(intList.getTail());
-		System.out.println(intList.getSize());
-		System.out.println(intList);
+		System.out.println("After Removing Tail, Size Is: " + intList.getSize());
+		System.out.println("List: " + intList);
 	}
 
 }
