@@ -31,6 +31,21 @@ void linked_list_destroy(linked_list_t *list) {
 
 }
 
+int linked_list_get(linked_list_t *list, int pos, void **data) {
+
+  int status = 0, i = 0;
+  if (list != NULL && list->head != NULL) {
+    node_t *temp = list->head;
+    while (temp->next != NULL && i++ < pos) temp = temp->next;
+    if (i-1 == pos) {
+      *data = temp->data;
+      status = 1;
+    }
+  }
+  return status;
+
+}
+
 int linked_list_append_to_head(linked_list_t *list, void *data) {
 
   int status = 0;
