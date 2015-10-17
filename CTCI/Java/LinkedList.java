@@ -53,6 +53,27 @@ public class LinkedList<T> {
 		++size;
 	}
 
+	public T removeHead() {
+		if (head == null) return null;
+		T data = head.getData();
+		head = head.getNext();
+		--size;
+		return data;
+	}
+
+	public T removeTail() {
+		if (head == null) return null;
+		Node<T> cursor = head, prev = null;
+		while (cursor.getNext() != null) {
+			prev = cursor;
+			cursor = cursor.getNext();
+		}
+		if (prev != null) prev.setNext(null);
+		else head = null;
+		--size;
+		return cursor.getData();
+	}
+
 	public void deleteNode(Node<T> node) {
 		Node<T> cursor = head;
 		if (cursor != null) {
@@ -73,12 +94,30 @@ public class LinkedList<T> {
 		}
 	}
 
+	public String toString() {
+		String str = "";
+		Node<T> cursor = head;
+		while (cursor != null) {
+			str += cursor.getData().toString();
+			if (cursor.getNext() != null) {
+				str += " ";
+			}
+		}
+		return str;
+	}
+
 	public static void main(String[] args) {
 		LinkedList<Integer> intList = new LinkedList<Integer>();
 		intList.appendToTail(2);
 		intList.appendToTail(10);
+		intList.appendToHead(98);
+		intList.appendToHead(99);
+		intList.appendToHead(100);
+		System.out.println(intList.removeHead());
+		System.out.println(intList.removeTail());
 		intList.deleteNode(intList.getTail());
 		System.out.println(intList.getSize());
+		System.out.println(intList);
 	}
 
 }
