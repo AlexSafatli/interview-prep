@@ -13,6 +13,8 @@ typedef struct {
 linked_list_t *linked_list_init ( );
 void linked_list_destroy ( linked_list_t *list );
 int linked_list_append_to_head ( linked_list_t *list, void *data );
-int linked_list_remove_head ( linked_list_t *list, void **data);
+int linked_list_remove_head ( linked_list_t *list, void **data );
+int linked_list_append_to_tail ( linked_list_t *list, void *data );
+int linked_list_remove_tail ( linked_list_t *list, void **data );
 
 #endif /* _linked_list_h_ */

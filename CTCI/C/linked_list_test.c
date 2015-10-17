@@ -7,6 +7,8 @@ int main(void) {
   linked_list_t* list = linked_list_init();
   linked_list_append_to_head(list, &a);
   linked_list_append_to_head(list, &b);
+  linked_list_append_to_tail(list, &b);
+  linked_list_append_to_tail(list, &b);
   int *ptr;
   while (linked_list_remove_head(list, (void**) &ptr)) {
     printf("%d ", *ptr);

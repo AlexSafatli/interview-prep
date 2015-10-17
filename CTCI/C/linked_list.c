@@ -66,4 +66,48 @@ int linked_list_remove_head(linked_list_t *list, void **data) {
 
 }
 
+int linked_list_append_to_tail(linked_list_t *list, void *data) {
 
+  int status = 0;
+  if (list != NULL) {
+    if (list->head != NULL) {
+      node_t *node = (node_t*) malloc(sizeof(node_t));
+      if (node != NULL) {
+        node_t *temp = list->head;
+        while (temp->next != NULL) temp = temp->next;
+        temp->next = node;
+        node->next = NULL;
+        node->data = data;
+        status = 1;
+      }
+    }
+  }
+  return status;
+
+}
+
+int linked_list_remove_tail(linked_list_t *list, void **data) {
+
+  int status = 0;
+  if (list != NULL && data != NULL) {
+    if (list->head != NULL) {
+      // Go to tail.
+      node_t *prev = NULL;
+      node_t *temp = list->head;
+      while (temp->next != NULL) {
+        prev = temp;
+        temp = temp->next;
+      }
+      // Get data.
+      *data = temp->data;
+      // Remove node.
+      if (prev != NULL) prev->next = temp->next;
+      else list->head = NULL;
+      free(temp);
+      status = 1;
+    }
+    else *data = NULL;
+  }
+  return status;
+
+}
