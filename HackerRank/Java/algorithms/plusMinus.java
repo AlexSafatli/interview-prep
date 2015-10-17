@@ -19,6 +19,9 @@ public class Solution {
             else ++zeroCount;
             ++total;
         }
-        
+        pos = (posCount*1.0)/total;
+        neg = (negCount*1.0)/total;
+        zeroes = (zeroCount*1.0)/total;
+        System.out.printf("%.3f\n%.3f\n%.3f\n",pos,neg,zeroes);
     }
 }
