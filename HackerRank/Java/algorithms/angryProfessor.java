@@ -12,7 +12,7 @@ cancelled and "NO" (without quotes) otherwise.
 
 import java.util.*;
 
-public class Solution {
+class Solution {
   private static Scanner stdin = new Scanner(System.in);
   public static void main(String[] args) {
     int numTestCases = stdin.nextInt();

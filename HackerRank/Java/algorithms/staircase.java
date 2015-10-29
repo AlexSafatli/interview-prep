@@ -14,7 +14,7 @@ where N = 6.
 
 import java.util.*;
 
-public class Solution {
+class Solution {
   public static void main(String[] args) {
     Scanner stdin = new Scanner(System.in);
     int n = stdin.nextInt();

@@ -1,10 +1,6 @@
-import java.io.*;
 import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
 
-public class Solution {
+class Solution {
 
     public static void main(String[] args) {
         Scanner stdin = new Scanner(System.in);
