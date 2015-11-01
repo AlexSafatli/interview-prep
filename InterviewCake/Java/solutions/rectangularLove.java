@@ -1,5 +1,5 @@
-import inc.Rectangle;
-import inc.RangeOverlap;
+import common.Rectangle;
+import common.RangeOverlap;
 
 class RectangularLove {
 

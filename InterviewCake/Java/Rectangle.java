@@ -1,4 +1,4 @@
-package inc;
+package common;
 
 public class Rectangle {
 
