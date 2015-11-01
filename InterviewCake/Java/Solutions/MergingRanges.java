@@ -2,6 +2,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Collections;
+import common.Meeting;
 
 class MergingRanges {
 
@@ -78,21 +79,6 @@ class MeetingComparator implements Comparator<Meeting> {
   @Override
   public int compare(Meeting a, Meeting b) {
     return a.startTime - b.startTime;
-  }
-
-}
-
-class Meeting {
-
-  int startTime, endTime;
-
-  public Meeting(int sT, int eT) {
-    // Number of 30min blocks past 9am.
-    startTime = sT; endTime = eT;
-  }
-
-  public String toString() {
-    return String.format("(%d, %d)", startTime, endTime);
   }
 
 }
