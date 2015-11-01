@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class Solution {
+class HighestProductOfThree {
 
   public static int getHighestProductOfThree(int[] arr) {
     int highestValue, highestProductOf2, highestProductOf3,

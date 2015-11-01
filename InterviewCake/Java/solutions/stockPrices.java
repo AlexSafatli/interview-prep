@@ -1,4 +1,4 @@
-class Solution {
+class StockPrices {
 
   public int getMaxProfit(int[] stockPricesYesterday) {
     if (stockPricesYesterday.length < 2) {

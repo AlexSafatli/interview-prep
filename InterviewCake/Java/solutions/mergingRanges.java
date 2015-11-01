@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Collections;
 
-class Solution {
+class MergingRanges {
 
   public static void main(String[] args) {
 

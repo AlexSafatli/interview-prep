@@ -1,4 +1,4 @@
-class Solution {
+class Coin {
 
   public static int numberOfWaysToMakeAmountWithDenominations(int amount,
     int[] denominations) {

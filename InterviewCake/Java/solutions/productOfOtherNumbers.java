@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Solution {
+class ProductOfOtherNumbers {
 
   public static List<Integer> getProductsOfAllIntsExceptAtIndex(
     List<Integer> intList) {
