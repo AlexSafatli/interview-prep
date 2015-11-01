@@ -8,6 +8,7 @@ class Solution {
     for (int i = 0; i < denominations.length; ++i) {
       int coin = denominations[i];
       for (int higher = coin; higher < amount + 1; ++higher) {
+        // Bottom-up calculate successively larger remainders.
         waysForNCents[higher] += waysForNCents[higher - coin];
       }
     }
@@ -16,9 +17,9 @@ class Solution {
 
   public static void main(String[] args) {
     System.out.println(numberOfWaysToMakeAmountWithDenominations(4, 
-      new int[] { 1, 2, 3 }));
+      new int[] { 1, 2, 3 })); // #=> 4
     System.out.println(numberOfWaysToMakeAmountWithDenominations(5,
-      new int[] { 1, 3, 5 }));
+      new int[] { 1, 3, 5 })); // #=> 3
   }
 
 }
