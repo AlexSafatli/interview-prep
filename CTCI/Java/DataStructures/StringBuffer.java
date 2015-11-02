@@ -1,4 +1,5 @@
 package structures;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class StringBuffer {
   }
 
   public String toString() {
-    return new String(strings.toArray(new String[strings.size()]));
+    return Arrays.toString(strings.toArray(new String[strings.size()]));
   }
 
 }

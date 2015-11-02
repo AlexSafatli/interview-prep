@@ -45,6 +45,10 @@ public class LinkedList<T> {
 		return cursor;
 	}
 
+	public Node<T> getKthToLastNode(int k) {
+		// @todo Implement (CTCI 2.2)
+	}
+
 	public Node<T> appendToTail(T data) {
 		Node<T> n = new Node<T>(data);
 		appendNodeToTail(n);
@@ -85,6 +89,7 @@ public class LinkedList<T> {
 		return cursor.getData();
 	}
 
+	// CTCI 2.3
 	public void deleteNode(Node<T> node) {
 		Node<T> cursor = head;
 		if (cursor != null) {
@@ -106,7 +111,7 @@ public class LinkedList<T> {
 	}
 
 	public void removeDuplicates() {
-		// @todo Implement
+		// @todo Implement (CTCI 2.1)
 	}
 
 	public String toString() {
