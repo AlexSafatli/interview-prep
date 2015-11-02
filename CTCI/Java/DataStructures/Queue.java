@@ -3,7 +3,7 @@ import structures.LinkedList;
 
 public class Queue<T> {
 
-  LinkedList<T> elements;
+  private LinkedList<T> elements;
 
   public Queue() {
     elements = new LinkedList<T>();

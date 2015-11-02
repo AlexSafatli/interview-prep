@@ -3,7 +3,7 @@ import structures.LinkedList;
 
 public class Stack<T> {
 
-  LinkedList<T> elements;
+  private LinkedList<T> elements;
 
   public Stack() {
     elements = new LinkedList<T>();
