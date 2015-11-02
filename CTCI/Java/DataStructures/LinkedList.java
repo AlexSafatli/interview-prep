@@ -18,7 +18,7 @@ public class LinkedList<T> {
 		return head;
 	}
 
-	public int getSize() {
+	public int size() {
 		return size;
 	}
 
@@ -47,6 +47,7 @@ public class LinkedList<T> {
 
 	public Node<T> getKthToLastNode(int k) {
 		// @todo Implement (CTCI 2.2)
+		return null;
 	}
 
 	public Node<T> appendToTail(T data) {
@@ -112,6 +113,7 @@ public class LinkedList<T> {
 
 	public void removeDuplicates() {
 		// @todo Implement (CTCI 2.1)
+		;
 	}
 
 	public String toString() {
@@ -137,7 +139,7 @@ public class LinkedList<T> {
 		System.out.println("Removing Head: " + intList.removeHead());
 		System.out.println("Removing Tail: " + intList.removeTail());
 		intList.deleteNode(intList.getTail());
-		System.out.println("After Removing Tail, Size Is: " + intList.getSize());
+		System.out.println("After Removing Tail, Size Is: " + intList.size());
 		System.out.println("List: " + intList);
 	}
 
