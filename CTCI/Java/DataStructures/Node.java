@@ -4,6 +4,7 @@ public class Node<T> {
 	
 	private Node<T> next;
 	private T data;
+	boolean visited;
 
 	public Node() {
 		next = null; data = null;
