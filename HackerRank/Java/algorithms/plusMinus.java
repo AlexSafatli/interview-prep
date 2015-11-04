@@ -6,7 +6,7 @@ Print the value of the fractions correct to 3 decimal places.
 
 import java.util.*;
 
-class Solution {
+public class PlusMinus {
 
   public static void main(String[] args) {
     Scanner stdin = new Scanner(System.in);

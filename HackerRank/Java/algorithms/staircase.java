@@ -14,7 +14,7 @@ where N = 6.
 
 import java.util.*;
 
-class Solution {
+public class Staircase {
   public static void main(String[] args) {
     Scanner stdin = new Scanner(System.in);
     int n = stdin.nextInt();

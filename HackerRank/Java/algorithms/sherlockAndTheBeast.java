@@ -26,7 +26,7 @@ digits are valid numbers - among them, the given number is the largest one.
 
 import java.util.*;
 
-class Solution {
+public class SherlockAndTheBeast {
 
   public static String largestDecentNumberWithNDigits(int n) {
     if  (n == 1)  return "-1";

@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Solution {
+public class VeryBigSum {
   public static void main(String[] args) {
     Scanner stdin = new Scanner(System.in);
     long sum = 0;

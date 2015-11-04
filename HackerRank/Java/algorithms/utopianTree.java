@@ -16,7 +16,7 @@ OUTPUT: For each test case, the height of Utopian Tree after N cycles.
 
 import java.util.*;
 
-class Solution {
+public class UtopianTree {
 
   public static int heightOfTree(int numCycles) {
     int height = 1;

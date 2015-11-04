@@ -4,7 +4,7 @@ You are given a square matrix of size N×N. Calculate the absolute difference of
 
 import java.util.*;
 
-class Solution {
+public class DiagonalDifference {
 
     public static void main(String[] args) {
         Scanner stdin = new Scanner(System.in);
