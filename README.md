@@ -31,7 +31,7 @@ other techniques outlined in respective `README` files.
 
 ## Comment Notation
 
-Certain shorthand is used in some comments. For example, `REP` indicates that a 
-particular problem or structure in code has been found in another resource or 
+Certain shorthand is used in some comments. For example, `@REP` indicates that 
+a particular problem or structure in code has been found in another resource or 
 problem set. This is followed by where and how it can be found in that 
 resource.

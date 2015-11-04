@@ -52,6 +52,7 @@ class linkedList(object):
 		self.head = n
 		self.size += 1
 	def deleteNode(self,n):
+		# @REP DeleteNode on InterviewCake
 		cursor = self.head
 		if cursor != None:
 			if cursor == n:
