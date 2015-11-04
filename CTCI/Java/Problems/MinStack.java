@@ -1,4 +1,6 @@
 import structures.Stack;
+// (REP LargestStack on InterviewCake)
+// A MinStack is similar to a MaxStack. Similar principle.
 public class MinStack extends Stack<Integer> {
 
   private Stack<Integer> minStack;
