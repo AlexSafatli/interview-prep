@@ -18,6 +18,7 @@ public class HashTable<K,T> {
     this.capacity = capacity;
     keys = new LinkedList<K>();
     values = (SymbolTable<K,T>[]) new SymbolTable[capacity];
+    for (int i = 0; i < capacity; ++i) values[i] = new SymbolTable<K,T>();
   }
 
   public T get(K key) {
@@ -25,11 +26,7 @@ public class HashTable<K,T> {
   }
 
   public void put(K key, T value) {
-    int hash = hash(key);
-    if (values[hash] == null) {
-      values[hash] = new SymbolTable<K,T>();
-    }
-    values[hash].put(key, value);
+    values[hash(key)].put(key, value);
   }
 
   private int hash(K key) {
