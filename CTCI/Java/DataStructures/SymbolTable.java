@@ -1,6 +1,7 @@
 package structures;
+import structures.LinkedList;
 
-public class SymbolTable<T,K> {
+public class SymbolTable<K,T> {
 
   private Node head;
   private int size = 0;
@@ -38,6 +39,32 @@ public class SymbolTable<T,K> {
       }
     head = new Node(key, data, head);
     ++size;
+  }
+
+  public void delete(K key) {
+    if (head == null) return;
+    if (key.equals(head.key)) {
+      head = head.next;
+      --size;
+      return;
+    }
+    Node previous = head;
+    for (Node cursor = head.next; cursor != null; cursor = cursor.next) {
+      if (key.equals(cursor.key)) {
+        previous.next = cursor.next;
+        --size;
+        return;
+      }
+      previous = cursor;
+    }
+  }
+
+  public LinkedList<K> keys() { // @todo Convert to iterable.
+    LinkedList<K> keys = new LinkedList<K>();
+    for (Node cursor = head; cursor != null; cursor = cursor.next) {
+      keys.appendToTail(cursor.key);
+    }
+    return keys;
   }
 
   public static void main(String[] args) {
