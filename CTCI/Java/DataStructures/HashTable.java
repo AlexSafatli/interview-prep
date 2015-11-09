@@ -5,10 +5,8 @@ import structures.SymbolTable;
 public class HashTable<K,T> {
 
   private static final int INIT_CAPACITY = 13;
-  private LinkedList<K> keys;
   private SymbolTable<K,T>[] values;
   private int capacity;
-  private int size = 0;
 
   public HashTable() {
     this(INIT_CAPACITY);
@@ -27,6 +25,10 @@ public class HashTable<K,T> {
 
   public void put(K key, T value) {
     values[hash(key)].put(key, value);
+  }
+
+  public void delete(K key) {
+    values[hash(key)].delete(key);
   }
 
   private int hash(K key) {
