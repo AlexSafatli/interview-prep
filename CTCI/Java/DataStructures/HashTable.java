@@ -23,7 +23,11 @@ public class HashTable<T,K> {
   }
 
   public void put(T key, K value) {
-    // @todo Implement
+    values[hash(key)].appendToTail(value);
+  }
+
+  private int hash(T key) {
+    return ((key.hashCode() & 0x7fffffff) % capacity);
   }
 
 }
