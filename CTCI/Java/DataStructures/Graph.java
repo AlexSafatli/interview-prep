@@ -1,15 +1,18 @@
 package structures;
-//import java.util.Map;
-//import java.util.HashMap;
-//import structures.Edge;
+import structures.HashTable;
+import structures.Node;
 
 public class Graph {
  
-  // private Map<Integer,Edge> adjacency;
-  // private int size;
+  private HashTable<Integer,Edge> adjacency;
+  private int size;
 
-  // public Graph() {
-  //   adjacency = new HashMap<Integer,Edge>();
-  // }
+  private class Edge {
+    // @todo Implement
+  }
+
+  public Graph() {
+    adjacency = new HashTable<Integer,Edge>();
+  }
 
 }
