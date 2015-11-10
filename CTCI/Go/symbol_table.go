@@ -50,9 +50,22 @@ func (list *SymbolTable) AppendNodeToTail(node *Node) {
   list.size++
 }
 
+func (list *SymbolTable) Get(key int) int {
+  if (list.head == nil) {
+    return -1
+  }
+  var cursor *Node = list.head
+  for ; cursor != nil ; cursor = cursor.next {
+    if (cursor.key == key) {
+      return cursor.data
+    }
+  }
+  return -1
+}
+
 /* Main (Test) */
 func main() {
   l := NewSymbolTable()
   l.Put(2, 2)
-  println(l.head.data)
+  println(l.Get(2))
 }
