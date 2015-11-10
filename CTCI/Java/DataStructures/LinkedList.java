@@ -10,7 +10,7 @@ public class LinkedList<T> {
 	}
 
 	public LinkedList(T[] arr) {
-		super();
+		this();
 		for (int i = 0; i < arr.length; ++i) add(arr[i]);
 	}
 
@@ -136,7 +136,7 @@ public class LinkedList<T> {
 
 	public static void main(String[] args) {
 		Integer[] arr = { 3, 4, 5 };
-		LinkedList<Integer> intList = new LinkedList<Integer>();
+		LinkedList<Integer> intList = new LinkedList<Integer>(arr);
 		intList.appendToTail(2);
 		intList.appendToTail(10);
 		intList.appendToHead(98);

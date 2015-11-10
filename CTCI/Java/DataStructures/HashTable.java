@@ -15,7 +15,8 @@ public class HashTable<K,T> {
   public HashTable(int capacity) {
     this.capacity = capacity;
     values = (SymbolTable<K,T>[]) new SymbolTable[capacity];
-    for (int i = 0; i < capacity; ++i) values[i] = new SymbolTable<K,T>();
+    for (int i = 0; i < capacity; ++i)
+      values[i] = new SymbolTable<K,T>();
   }
 
   public T get(K key) {
