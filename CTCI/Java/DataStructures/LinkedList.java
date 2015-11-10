@@ -29,9 +29,7 @@ public class LinkedList<T> {
 	}
 
 	public void appendNodeToHead(Node<T> node) {
-		if (head != null) {
-			node.setNext(head);
-		}
+		if (head != null) node.setNext(head);
 		head = node;
 		++size;
 	}
