@@ -90,6 +90,13 @@ public class LinkedList<T> {
 		return cursor.getData();
 	}
 
+	public boolean contains(T data) {
+		for (Node<T> cursor = head; cursor != null; cursor = cursor.getNext()) {
+			if (cursor.getData().equals(data)) return true;
+		}
+		return false;
+	}
+
 	// CTCI 2.3
 	public void deleteNode(Node<T> node) {
 		Node<T> cursor = head;
