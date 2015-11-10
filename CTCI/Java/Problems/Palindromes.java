@@ -3,10 +3,8 @@ class Palindromes {
   public static boolean isPalindrome(String s) {
     int l = s.length();
     for (int i = 0; i < l/2; ++i) {
-      char a = s.charAt(i), b = s.charAt(l-i-1);
-      if (a != b) return false;
-    }
-    return true;
+      if (s.charAt(i) != s.charAt(l-i-1)) return false;
+    } return true;
   }
 
   public static void main(String[] args) {
