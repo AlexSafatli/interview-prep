@@ -1,4 +1,4 @@
-JAVA_FILES = DataStructures/*.java Problems/*.java
+JAVA_FILES = Algorithms/*.java DataStructures/*.java Problems/*.java
 
 all:
 	-mkdir build
