@@ -30,10 +30,4 @@ public class Node<T> {
 		next = node;
 	}
 
-	public boolean equals(Object other) {
-		Node<T> node = (Node<T>)other;
-		T odata = (T)node.getData();
-		return (odata.equals(data));
-	}
-
 }
