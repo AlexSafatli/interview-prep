@@ -37,9 +37,7 @@ public class LinkedList<T> {
 	public Node<T> getTail() {
 		Node<T> cursor = getHead();
 		if (cursor == null) return null;
-		while (cursor.getNext() != null) {
-			cursor = cursor.getNext();
-		}
+		while (cursor.getNext() != null) cursor = cursor.getNext();
 		return cursor;
 	}
 
