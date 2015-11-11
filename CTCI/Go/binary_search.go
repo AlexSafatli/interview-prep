@@ -21,6 +21,8 @@ func binarySearch(arr *[18]int, key int) int {
 
 /* Main (Test) */
 func main() {
-  arr := [...]int{12,32,4,23,6,42,16,3,85,23,4,7,3,5,45,34,2,1}
-  fmt.Println(arr[binarySearch(&arr, 85)])
+  arr := [...]int{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,85}
+  fmt.Println(arr[binarySearch(&arr, 16)] == 16)
+  fmt.Println(arr[binarySearch(&arr, 85)] == 85)
+  fmt.Println(arr[binarySearch(&arr, 3)] == 3)
 }
