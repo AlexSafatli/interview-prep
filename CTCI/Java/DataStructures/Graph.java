@@ -11,6 +11,10 @@ public class Graph {
   public Graph() {
     adjacency = new HashTable<Integer,LinkedList<Integer>>();
   }
+  
+  public void newVertex(int vertex) {
+    adjacency.put(vertex, new LinkedList<Integer>());
+  }
 
   public boolean adjacent(int a, int b) {
     LinkedList<Integer> edges = adjacency.get(a);
