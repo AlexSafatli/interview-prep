@@ -16,7 +16,7 @@ public class A {
 
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
-		while (in.hasNextLine()) {
+		while (in.hasNext()) {
 			double a = in.nextDouble();
 			double b = in.nextDouble();
 			double c = in.nextDouble();
