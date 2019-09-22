@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class B {
-	private class ThreeNumberBuffer {
+	 class ThreeNumberBuffer {
 		private double a = 0, b = 0, c = 0;
 
 		public void enqueue(double n) {
@@ -12,7 +12,8 @@ public class B {
 	}
 
 	public static void main(String[] args) {
-		ThreeNumberBuffer buffer = new ThreeNumberBuffer();
+		B b = new B();
+		ThreeNumberBuffer buffer = b.new ThreeNumberBuffer();
 		double maximalAverage = 0;
 		Scanner in = new Scanner(System.in);
 		while (in.hasNext()) {
