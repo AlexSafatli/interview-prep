@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class C {
-	public static countWalls(Scanner in, int size) {
+	public static int countWalls(Scanner in, int size) {
 		boolean[][] labyrinth = new boolean[size][size];
 		for (int i = 0; i < size; ++i) {
 			String line = in.nextLine();
