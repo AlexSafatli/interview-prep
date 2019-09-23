@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
 public class C {
-	public static int countWalls(Scanner in, int size) {
+	public static int countWalls(String[] lines, int size) {
 		boolean[][] labyrinth = new boolean[size][size];
 		for (int i = 0; i < size; ++i) {
-			String line = in.nextLine();
+			String line = lines[i];
 			char[] chars = line.toCharArray();
 			for (int j = 0; j < size; ++j) {
 				labyrinth[i][j] = chars[j] == 'x';
@@ -34,7 +34,11 @@ public class C {
 		Scanner in = new Scanner(System.in);
 		while (in.hasNext()) {
 			int size = in.nextInt();
-			System.out.println(countWalls(in, size)*3*3);
+			String[] lines = new String[size];
+			for (int i = 0; i < size; ++i) {
+				lines[i] = in.nextLine();
+			}
+			System.out.println(countWalls(lines, size)*3*3);
 		}
 	}	
 }
