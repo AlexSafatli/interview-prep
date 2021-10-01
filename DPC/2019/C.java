@@ -12,22 +12,13 @@ public class C {
 		}
 		int wallCount = 0;
 		for (int i = 0; i < size; ++i) {
-			for (int j = 0; j < size; ++j) {
-				if (i-1 == -1 || labyrinth[i-1][j]) {
-					++wallCount;
-				}
-				if (j-1 == -1 || labyrinth[i][j-1]) {
-					++wallCount;
-				}
-				if (i+1 == size || labyrinth[i+1][j]) {
-					++wallCount;
-				}
-				if (j+1 == size || labyrinth[i][j+1]) {
-					++wallCount;
-				}
+				if (i-1 == -1 || labyrinth[i-1][j])   ++wallCount;
+				if (j-1 == -1 || labyrinth[i][j-1])   ++wallCount;
+				if (i+1 == size || labyrinth[i+1][j]) ++wallCount;
+				if (j+1 == size || labyrinth[i][j+1]) ++wallCount;
 			}
 		}
-		return wallCount;
+		return wallCount-4;
 	}
 
 	public static void main(String[] args) {
@@ -35,6 +26,7 @@ public class C {
 		while (in.hasNext()) {
 			int size = in.nextInt();
 			String[] lines = new String[size];
+			in.nextLine();
 			for (int i = 0; i < size; ++i) {
 				lines[i] = in.nextLine();
 			}

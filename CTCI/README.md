@@ -9,5 +9,6 @@ of code to refer to for common data structures and code idioms.
 
   * ANSI C (`./C`)
   * Java (`./Java`)
-  * Python (`./Python`)
+  * Python (`./Python`) is for Python 3 implementations
+  * Python (`./Python2`) is for old Python 2 implementations
   * Go (`./Go`)

@@ -27,6 +27,7 @@ other techniques outlined in respective `README` files.
   - **DPC** (`./DPC`) is code written for the [https://web.cs.dal.ca/~dpc/](Dalhousie Programming Competition).
   - **FEPSQ** (`./FEPSQ`) has code written in response to a blog article found online.
   - **HackerRank** (`./HackerRank`) code is for that website's challenges.
+  - **InterviewCake** (`./InterviewCake`) code is for that website's challenges.
   - **NLP** (`./NLP`) contains code from a *Advanced Topics in Natural Language Processing* course taken in university.
   - **TopCoder** (`./TopCoder`) contains code in response to challenges found on that website.
 
