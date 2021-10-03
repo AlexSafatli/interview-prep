@@ -154,6 +154,41 @@ def all_parantheses_for_n(n: int) -> str:
     return '\n'.join(result)
 
 
+# 8.2, Robot in a Grid, Uses dynamic programming top-down memoization approach
+def find_path_for_robot_in_a_grid(maze):
+    if maze is None or len(maze) == 0:
+        return None
+    path = []
+    failed_pts = {}
+    if find_path(maze, len(maze)-1, len(maze[0])-1, path, failed_pts):
+        return path
+    return None
+
+
+def find_path(maze, row: int, col: int, path: list, failed_pts: dict) -> bool:
+    # Out of bounds or n/a
+    if col < 0 or row < 0 or not maze[row][col]:
+        return False
+
+    pt = (row, col)
+
+    # If already visited
+    if pt in failed_pts:
+        return False
+
+    is_at_origin = row == 0 and col == 0
+
+    # If there is a path from start to here, add location to path
+    if is_at_origin or find_path(maze, row, col-1, path, failed_pts) or \
+            find_path(maze, row-1, col, path, failed_pts):
+        path.append((row, col))
+        return True
+
+    # Cache failed results
+    failed_pts[pt] = True
+    return False
+
+
 if __name__ == '__main__':
     arr = [0, 9, 2, 1, 19]
     print('mergesort on ', arr)
@@ -166,9 +201,15 @@ if __name__ == '__main__':
     test_str = 'Dark'
     print(all_permutations([], test_str))
     print(all_parantheses_for_n(3))
+    print('\n' + '='*10 + 'Tower of Hanoi Problem' + '='*10)
     towers = [TowerOfHanoi(0), TowerOfHanoi(1), TowerOfHanoi(2)]
     for x in range(4, -1, -1):
         towers[0].add_disk(x)
     towers[0].move_n_disks_to(5, towers[2], towers[1])
     for x in range(0, 3):
         print('Tower:', x, towers[x])
+    print('\n' + '='*10 + 'Robot in a Grid Problem' + '='*10)
+    grid = [[True, False, False, True], [True, True, True, True],
+            [False, True, True, True]]
+    correct_path = find_path_for_robot_in_a_grid(grid)
+    print(correct_path)
