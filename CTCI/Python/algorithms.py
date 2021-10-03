@@ -1,3 +1,41 @@
+from stacks_queues import Stack
+
+
+class TowerOfHanoi(object):
+    def __init__(self, label: int):
+        self.label = label
+        self.disks = Stack()
+
+    def add_disk(self, num: int):
+        if len(self.disks) > 0 and self.disks.peek() <= num:
+            raise AssertionError('Disk must be placed on larger one')
+        self.disks.push(num)
+
+    def remove_top_disk(self) -> int:
+        if len(self.disks) == 0:
+            return -1
+        return self.disks.pop()
+
+    def move_top_disk_to(self, dest):
+        disk = self.remove_top_disk()
+        if disk == -1:
+            raise AssertionError('No top disk found')
+        if dest is None:
+            raise AssertionError('Need another tower')
+        dest.add_disk(disk)
+        print('Moved %d from %d to %d.' % (disk, self.label, dest.label))
+
+    def move_n_disks_to(self, n, dest, intermediate):
+        if n <= 0:
+            return
+        self.move_n_disks_to(n-1, intermediate, dest)
+        self.move_top_disk_to(dest)
+        intermediate.move_n_disks_to(n-1, dest, self)
+
+    def __str__(self) -> str:
+        return str(self.disks)
+
+
 # Mergesort implementation; O(nlgn)
 def mergesort(li):
     # If a single element, already sorted.
@@ -128,4 +166,9 @@ if __name__ == '__main__':
     test_str = 'Dark'
     print(all_permutations([], test_str))
     print(all_parantheses_for_n(3))
-
+    towers = [TowerOfHanoi(0), TowerOfHanoi(1), TowerOfHanoi(2)]
+    for x in range(4, -1, -1):
+        towers[0].add_disk(x)
+    towers[0].move_n_disks_to(5, towers[2], towers[1])
+    for x in range(0, 3):
+        print('Tower:', x, towers[x])
