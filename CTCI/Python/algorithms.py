@@ -1,4 +1,42 @@
+import typing
+
 from stacks_queues import Stack
+
+
+class RankNode(object):
+    def __init__(self, dat: int):
+        self.data = dat
+        self.left_size = 0
+        self.left: typing.Optional[RankNode] = None
+        self.right: typing.Optional[RankNode] = None
+
+    def insert(self, dat: int):
+        if dat < self.data:
+            if self.left is not None:
+                self.left.insert(dat)
+            else:
+                self.left = RankNode(dat)
+            self.left_size += 1
+        else:
+            if self.right is not None:
+                self.right.insert(dat)
+            else:
+                self.right = RankNode(dat)
+
+    def get_rank(self, dat: int):
+        if dat == self.data:
+            return self.left_size
+        elif dat < self.data:
+            if self.left is None:
+                return -1
+            return self.left.get_rank(dat)
+        else:
+            right_rank = -1
+            if self.right is not None:
+                right_rank = self.right.get_rank(dat)
+            if right_rank == -1:
+                return -1
+            return self.left_size + 1 + right_rank
 
 
 class TowerOfHanoi(object):
@@ -202,6 +240,11 @@ def magic_index(li: list, start: int, end: int) -> int:
         return magic_index(li, mid + 1, end)
 
 
+# 10.10, Rank from Stream
+def get_rank_of_number(root: RankNode, num: int):
+    return root.get_rank(num)
+
+
 if __name__ == '__main__':
     arr = [0, 9, 2, 1, 19]
     sorted_distinct_arr = [-40, -20, -1, 1, 2, 3, 5, 7, 9, 12, 13]
@@ -215,9 +258,11 @@ if __name__ == '__main__':
     test_str = 'Dark'
     print(all_permutations([], test_str))
     print(all_parantheses_for_n(3))
+
     print('\n' + '=' * 10 + 'Magic Index' + '=' * 10)
     print(sorted_distinct_arr)
     print(magic_index(sorted_distinct_arr, 0, len(sorted_distinct_arr) - 1))
+
     print('\n' + '=' * 10 + 'Tower of Hanoi Problem' + '=' * 10)
     towers = [TowerOfHanoi(0), TowerOfHanoi(1), TowerOfHanoi(2)]
     for x in range(4, -1, -1):
@@ -225,8 +270,22 @@ if __name__ == '__main__':
     towers[0].move_n_disks_to(5, towers[2], towers[1])
     for x in range(0, 3):
         print('Tower:', x, towers[x])
+
     print('\n' + '=' * 10 + 'Robot in a Grid Problem' + '=' * 10)
     grid = [[True, False, False, True], [True, True, True, True],
             [False, True, True, True]]
     correct_path = find_path_for_robot_in_a_grid(grid)
+    print('\n'.join([str(x) for x in grid]))
     print(correct_path)
+
+    print('\n' + '=' * 10 + 'Get Rank' + '=' * 10)
+    search_tree = None
+    num_stream = [0, 6, 3, 4, 5, 19, 9, 23, 12]
+    for n in num_stream:
+        if search_tree is None:
+            search_tree = RankNode(n)
+        else:
+            search_tree.insert(n)
+    print(num_stream)
+    print('Rank(23):', get_rank_of_number(search_tree, 23))
+    print('Rank(6):', get_rank_of_number(search_tree, 6))
