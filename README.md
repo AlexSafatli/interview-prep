@@ -24,7 +24,7 @@ other techniques outlined in respective `README` files.
   - **CareerCup** (`./CareerCup`) has interview question answers for that website.
   - **Classical** (`./Classical`) has code that do not belong in any other particular directory but instead deal with classical problems or data structures.
   - **CTCI** (`./CTCI`) is code written while reading the *Cracking the Coding Interview* book.
-  - **DPC** (`./DPC`) is code written for the [https://web.cs.dal.ca/~dpc/](Dalhousie Programming Competition).
+  - **DPC** (`./DPC`) is code written for the [Dalhousie Programming Competition](https://web.cs.dal.ca/~dpc/).
   - **FEPSQ** (`./FEPSQ`) has code written in response to a blog article found online.
   - **HackerRank** (`./HackerRank`) code is for that website's challenges.
   - **InterviewCake** (`./InterviewCake`) code is for that website's challenges.
