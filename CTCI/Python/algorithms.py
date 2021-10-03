@@ -28,9 +28,9 @@ class TowerOfHanoi(object):
     def move_n_disks_to(self, n, dest, intermediate):
         if n <= 0:
             return
-        self.move_n_disks_to(n-1, intermediate, dest)
+        self.move_n_disks_to(n - 1, intermediate, dest)
         self.move_top_disk_to(dest)
-        intermediate.move_n_disks_to(n-1, dest, self)
+        intermediate.move_n_disks_to(n - 1, dest, self)
 
     def __str__(self) -> str:
         return str(self.disks)
@@ -41,7 +41,7 @@ def mergesort(li):
     # If a single element, already sorted.
     if len(li) <= 1:
         return
-    mid = int((len(li))/2)
+    mid = int((len(li)) / 2)
     left = li[:mid]
     right = li[mid:]
     mergesort(left)
@@ -77,7 +77,7 @@ def all_subsets_of_a_set(li, index: int):
     # For one of them, add n to each subset
     if index == len(li):
         return [[]]
-    all_subsets = all_subsets_of_a_set(li, index+1)
+    all_subsets = all_subsets_of_a_set(li, index + 1)
     subsets = []
     for subset in all_subsets:
         new = []
@@ -141,14 +141,14 @@ def parantheses(i, r, cnt, str_li, coll):
         return  # done
     if i > 0:  # some left "(" to place
         str_li[cnt] = '('
-        parantheses(i-1, r, cnt+1, str_li, coll)
+        parantheses(i - 1, r, cnt + 1, str_li, coll)
     if r > i:
         str_li[cnt] = ')'
-        parantheses(i, r-1, cnt+1, str_li, coll)
+        parantheses(i, r - 1, cnt + 1, str_li, coll)
 
 
 def all_parantheses_for_n(n: int) -> str:
-    li = ['*' for _ in range(2*n)]
+    li = ['*' for _ in range(2 * n)]
     result = []
     parantheses(n, n, 0, li, result)
     return '\n'.join(result)
@@ -160,7 +160,7 @@ def find_path_for_robot_in_a_grid(maze):
         return None
     path = []
     failed_pts = {}
-    if find_path(maze, len(maze)-1, len(maze[0])-1, path, failed_pts):
+    if find_path(maze, len(maze) - 1, len(maze[0]) - 1, path, failed_pts):
         return path
     return None
 
@@ -179,8 +179,8 @@ def find_path(maze, row: int, col: int, path: list, failed_pts: dict) -> bool:
     is_at_origin = row == 0 and col == 0
 
     # If there is a path from start to here, add location to path
-    if is_at_origin or find_path(maze, row, col-1, path, failed_pts) or \
-            find_path(maze, row-1, col, path, failed_pts):
+    if is_at_origin or find_path(maze, row, col - 1, path, failed_pts) or \
+            find_path(maze, row - 1, col, path, failed_pts):
         path.append((row, col))
         return True
 
@@ -189,8 +189,22 @@ def find_path(maze, row: int, col: int, path: list, failed_pts: dict) -> bool:
     return False
 
 
+# 8.3, Magic index - given sorted array of distinct ints, find i where A[i] = i
+def magic_index(li: list, start: int, end: int) -> int:
+    if end < start:
+        return -1  # not found
+    mid = int((start + end) / 2)
+    if li[mid] == mid:
+        return mid  # found
+    elif li[mid] > mid:  # must be on left
+        return magic_index(li, start, mid - 1)
+    else:  # must be on right
+        return magic_index(li, mid + 1, end)
+
+
 if __name__ == '__main__':
     arr = [0, 9, 2, 1, 19]
+    sorted_distinct_arr = [-40, -20, -1, 1, 2, 3, 5, 7, 9, 12, 13]
     print('mergesort on ', arr)
     mergesort(arr)
     print(arr)
@@ -201,14 +215,17 @@ if __name__ == '__main__':
     test_str = 'Dark'
     print(all_permutations([], test_str))
     print(all_parantheses_for_n(3))
-    print('\n' + '='*10 + 'Tower of Hanoi Problem' + '='*10)
+    print('\n' + '=' * 10 + 'Magic Index' + '=' * 10)
+    print(sorted_distinct_arr)
+    print(magic_index(sorted_distinct_arr, 0, len(sorted_distinct_arr) - 1))
+    print('\n' + '=' * 10 + 'Tower of Hanoi Problem' + '=' * 10)
     towers = [TowerOfHanoi(0), TowerOfHanoi(1), TowerOfHanoi(2)]
     for x in range(4, -1, -1):
         towers[0].add_disk(x)
     towers[0].move_n_disks_to(5, towers[2], towers[1])
     for x in range(0, 3):
         print('Tower:', x, towers[x])
-    print('\n' + '='*10 + 'Robot in a Grid Problem' + '='*10)
+    print('\n' + '=' * 10 + 'Robot in a Grid Problem' + '=' * 10)
     grid = [[True, False, False, True], [True, True, True, True],
             [False, True, True, True]]
     correct_path = find_path_for_robot_in_a_grid(grid)
