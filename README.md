@@ -9,9 +9,9 @@ to grab and use later.
 
 ## Language Coverage
 
-There are samples of code written in Python, C++, Java, Perl, and Go. While I 
-love writing code in C, it does not tend to be my language of choice for 
-interview preparation.
+There are samples of code written in Python (both 2 and 3), C++, Java, Perl, 
+and Go. While I love writing code in C, it does not tend to be my language of 
+choice for interview preparation.
 
 ## Organization
  
