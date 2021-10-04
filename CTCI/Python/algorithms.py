@@ -245,6 +245,40 @@ def get_rank_of_number(root: RankNode, num: int):
     return root.get_rank(num)
 
 
+# 16.21, Sum Swap - given two arrays of integers, find pair of values (one from
+# each array) that you can swap to give the two arrays the same sum.
+def find_swap_values(li_1: list, li_2: list) -> typing.Optional[tuple]:
+    target = get_target(li_1, li_2)
+    if target is None:
+        return None
+    return find_difference(li_1, li_2, target)
+
+
+def get_target(li_1: list, li_2: list) -> typing.Optional[int]:
+    sum_1 = sum(li_1)
+    sum_2 = sum(li_2)
+    if (sum_1 - sum_2) % 2 != 0:
+        return None
+    return int((sum_1-sum_2)/2)
+
+
+def find_difference(li_1: list, li_2: list,
+                    target: int) -> typing.Optional[tuple]:
+    contents_2 = get_contents(li_2)
+    for i in li_1:
+        k = i - target
+        if k in contents_2:
+            return i, k
+    return None
+
+
+def get_contents(li: list) -> dict:
+    hash_dict = {}
+    for i in li:
+        hash_dict[i] = True
+    return hash_dict
+
+
 if __name__ == '__main__':
     arr = [0, 9, 2, 1, 19]
     sorted_distinct_arr = [-40, -20, -1, 1, 2, 3, 5, 7, 9, 12, 13]
@@ -289,3 +323,10 @@ if __name__ == '__main__':
     print(num_stream)
     print('Rank(23):', get_rank_of_number(search_tree, 23))
     print('Rank(6):', get_rank_of_number(search_tree, 6))
+
+    print('\n' + '=' * 10 + 'Sum Swap' + '=' * 10)
+    number_arr_1 = [4, 1, 2, 1, 1, 2]
+    number_arr_2 = [3, 6, 3, 3]
+    print(number_arr_1)
+    print(number_arr_2)
+    print('Sum Swap:', find_swap_values(number_arr_1, number_arr_2))
