@@ -2,15 +2,22 @@ import typing
 
 
 # Not optimized simple implementation of a trie using hash tables
-class TrieNode(object):
+class HashTrieNode(object):
     def __init__(self):
         self.children: dict = {}
         self.last: bool = False
 
 
+# And using a fixed-length array based on 26-character alphabet
+class LowercaseTrieNode(object):
+    def __init__(self):
+        self.children = [None] * 26
+        self.last: bool = False
+
+
 class Trie(object):
     def __init__(self):
-        self.root = TrieNode()
+        self.root = HashTrieNode()
         self._word_list = []
 
     def from_words(self, word_list: typing.List[str]):
@@ -23,7 +30,7 @@ class Trie(object):
         cursor = self.root
         for char in list(word):
             if char not in cursor.children:
-                cursor.children[char] = TrieNode()
+                cursor.children[char] = HashTrieNode()
             cursor = cursor.children[char]
         cursor.last = True
 
@@ -39,7 +46,7 @@ class Trie(object):
             cursor = cursor.children[char]
         return cursor and cursor.last and found
 
-    def _prefix_rec(self, node: TrieNode, word: str):
+    def _prefix_rec(self, node: HashTrieNode, word: str):
         if node.last:
             self._word_list.append(word)
         for char, n in node.children.items():
@@ -65,5 +72,4 @@ if __name__ == '__main__':
     search_key = 'hel'
     t = Trie()
     t.from_words(keys)
-    words_found = t.all_words_with_prefix(search_key)
-    print(words_found)
+    print(t.all_words_with_prefix(search_key))
