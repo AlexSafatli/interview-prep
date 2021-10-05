@@ -64,6 +64,30 @@ class MinStack(Stack):
         super().push(dat)
 
 
+# @REP LargestStack on InterviewCake
+class MaxStack(Stack):
+    def __init__(self):
+        super().__init__()
+        self.max_stack: Stack = Stack()
+
+    def max(self) -> typing.Optional[int]:
+        return self.max_stack.peek()
+
+    def pop(self) -> typing.Optional[int]:
+        dat = super().pop()
+        if self.max() == dat:
+            self.max_stack.pop()
+        return dat
+
+    def push(self, dat: int):
+        if len(self.max_stack) > 0:
+            if self.max() <= dat:
+                self.max_stack.push(dat)
+        else:
+            self.max_stack.push(dat)
+        super().push(dat)
+
+
 if __name__ == '__main__':
     s = Stack()
     s.push('Door')
@@ -85,3 +109,11 @@ if __name__ == '__main__':
     print('Min:', ms.min())
     print('Popped:', ms.pop())
     print('Min:', ms.min())
+    mxs = MaxStack()
+    mxs.push(1)
+    mxs.push(2)
+    mxs.push(3)
+    print('MaxStack:', mxs)
+    print('Max:', mxs.max())
+    print('Popped:', mxs.pop())
+    print('Max:', mxs.max())
