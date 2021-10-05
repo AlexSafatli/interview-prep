@@ -4,9 +4,17 @@ import typing
 def fib(n: int) -> int:
     """Finds the nth Fibonacci number, iterative."""
     up, lo = 1, 0
-    for i in range(0, n):
+    for _ in range(n):
         up += lo
         lo = up - lo  # what high was
+    return lo
+
+
+def fib_concise(n: int) -> int:
+    # More concise iterative Fibonacci fuction
+    up, lo = 1, 0
+    for _ in range(n):
+        up, lo = up + lo, up
     return lo
 
 
@@ -18,7 +26,7 @@ def is_prime(n: int) -> bool:
         return True  # 2 is considered (first) prime
     elif n % 2 == 0:
         return False  # a multiple of 2 (not prime)
-    i = 3
+    i = 3  # test factors
     while i * i <= n:
         # Only need to look up to square root of n
         if n % i == 0:
@@ -55,9 +63,13 @@ def binary_search(arr: typing.List[int], key: int) -> int:
 
 if __name__ == '__main__':
     print('fib(5):', fib(5))
+    print('fib(12):', fib(12))
+    print('fib_concise(5):', fib_concise(5))
+    print('fib_concise(12):', fib_concise(12))
     print('is_prime(7):', is_prime(7))
     print('is_prime(673):', is_prime(673))
     print('add_no_arithmetic_operators(5,8):',
           add_no_arithmetic_operators(5, 8))
     numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 21, 25, 28]
-    print(numbers[binary_search(numbers, 25)])
+    print(numbers)
+    print('Search for 25:', numbers[binary_search(numbers, 25)])

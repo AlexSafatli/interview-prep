@@ -1,9 +1,9 @@
 from stacks_queues import Stack
 
 
-class Graph(object):
+class DirectionalGraph(object):
     def __init__(self):
-        self.adj = dict()
+        self.adj = {}
         self.next = 0
         self.size = 0
 
@@ -22,10 +22,12 @@ class Graph(object):
         if i in self.adj[j]:
             self.adj[j].remove(i)
 
-    def new_vertex(self):
-        self.adj[self.next] = list()
+    def new_vertex(self) -> int:
+        i = self.next
+        self.adj[i] = []
         self.size += 1
         self.next += 1
+        return i
 
     def remove_vertex(self, i):
         self.size -= 1
@@ -35,22 +37,23 @@ class Graph(object):
         del self.adj[i]
 
     def has_path(self, i, j):
-        to_search = Stack()
-        searched = list()
-        to_search.push(i)
-        while len(to_search) > 0:
-            cur = to_search.pop()
+        # DFS uses a Stack, BFS uses a Queue
+        dfs = Stack()
+        searched = []
+        dfs.push(i)
+        while len(dfs) > 0:
+            cur = dfs.pop()
             for ne in self.get_neighbors(cur):
                 if ne == j:
                     return True
                 elif ne not in searched:
-                    to_search.push(ne)
+                    dfs.push(ne)
             searched.append(cur)
         return False
 
 
 if __name__ == '__main__':
-    g = Graph()
+    g = DirectionalGraph()
     g.new_vertex()
     g.new_vertex()
     g.new_vertex()

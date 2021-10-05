@@ -37,7 +37,7 @@ def is_unique_characters_sorting_str(s: str) -> bool:
 
 
 def are_permutations(x, y) -> bool:
-    # works as long as x, y are sortable - intended for strings
+    # works as long as x, y have and a size/are sortable - intended for strings
     if len(x) != len(y):
         return False
     return sorted(x) == sorted(y)
@@ -64,22 +64,24 @@ def are_permutations_char_counts(x, y) -> bool:
 
 
 def transpose_square_matrix_in_place(mat):
-    N = len(mat)
     # Only consider upper triangle
-    for n in range(0, N-1):
-        for m in range(n+1, N):
+    for n in range(0, len(mat)-1):
+        for m in range(n+1, len(mat)):
             # swap mat[m][n] with mat[n][m]
             mat[m][n], mat[n][m] = mat[n][m], mat[m][n]
 
 
+# Testing Function
 def call_one_arg_func(f, s: str):
     print('%s(%s):' % (f.__name__, s), f(s))
 
 
+# Testing Function
 def call_two_arg_func(f, x, y):
     print('%s(%s,%s):' % (f.__name__, x, y), f(x,y))
 
 
+# Testing Function
 def print_square_matrix(matrix):
     for i in range(len(matrix)):
         for j in range(len(matrix)):
