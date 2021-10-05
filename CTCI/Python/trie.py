@@ -20,13 +20,11 @@ class Trie(object):
         self.root = HashTrieNode()
         self._word_list = []
 
-    def from_words(self, word_list: typing.List[str]):
-        # Forms a trie with a given set of strings; extend as required
+    def add_words(self, word_list: typing.List[str]):
         for word in word_list:
             self.insert(word)
 
     def insert(self, word: str):
-        # Insert into trie if not already exist; mark leaf
         cursor = self.root
         for char in list(word):
             if char not in cursor.children:
@@ -71,5 +69,8 @@ if __name__ == '__main__':
     keys = ['hello', 'dog', 'hell', 'cat', 'hel', 'help', 'helping']
     search_key = 'hel'
     t = Trie()
-    t.from_words(keys)
-    print(t.all_words_with_prefix(search_key))
+    t.add_words(keys)
+    print(keys)
+    print('Search Word:', search_key)
+    print('Words Found:', t.all_words_with_prefix(search_key))
+    print('"hel" in Trie:', 'hel' in t)
