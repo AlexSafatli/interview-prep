@@ -1,4 +1,43 @@
 ASCII_ALPHABET_LEN = 128
+NUMBER_HOUSES = 8
+
+
+# Have N number of houses in a straight line where every passing day each cell
+# is analyzed for its active/inactive state based on its neighbors
+class HousesState:
+    def __init__(self, states: list):
+        self.houses = [-1] * NUMBER_HOUSES
+        for i in range(len(states)):
+            if i >= NUMBER_HOUSES:
+                break
+            self.houses[i] = states[i]
+
+    def pass_day(self):
+        new_houses = [state for state in self.houses]
+        start, end = 0, NUMBER_HOUSES - 1
+
+        # Update all states simultaneously
+        for i in range(NUMBER_HOUSES):
+            # Check for left edge
+            if i == start and self.houses[2] == 0:
+                new_houses[i] = 0
+            # Check for right edge
+            elif i == end and self.houses[NUMBER_HOUSES-2] == 0:
+                new_houses[i] = 0
+            # Both inactive or active
+            elif i != start and i != end and \
+                    self.houses[i + 1] == self.houses[i - 1]:
+                new_houses[i] = 0
+            else:
+                new_houses[i] = 1
+
+        self.houses = new_houses
+        return self.houses
+
+    def pass_days(self, num_days=1):
+        for _ in range(num_days):
+            self.pass_day()
+        return self.houses
 
 
 def is_unique_characters_bool_arr(s: str) -> bool:
@@ -109,3 +148,11 @@ if __name__ == '__main__':
     transpose_square_matrix_in_place(mat)
     print()
     print_square_matrix(mat)
+    print()
+    print('\n==Houses==')
+    states_1 = [1, 0, 0, 0, 0, 1, 0, 0]
+    states_2 = [1, 1, 1, 0, 1, 1, 1, 1]
+    houses_1 = HousesState(states_1)
+    houses_2 = HousesState(states_2)
+    print(states_1, '->', houses_1.pass_day())
+    print(states_2, '->', houses_2.pass_days(2))
