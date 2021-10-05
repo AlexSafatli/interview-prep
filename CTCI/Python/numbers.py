@@ -1,4 +1,5 @@
 import typing
+import random
 
 
 def fib(n: int) -> int:
@@ -35,6 +36,20 @@ def is_prime(n: int) -> bool:
     return True
 
 
+def is_prime_concise(n: int) -> bool:
+    # More concise version of is_prime
+    if n == 2:
+        return True
+    elif n <= 1 or n % 2 == 0:
+        return False
+    i = 3
+    while i * i <= n:
+        if n % i == 0:
+            return False
+        i += 2
+    return True
+
+
 # 20.1 (pg 279); add two numbers NOT using any arithmetic operators.
 def add_no_arithmetic_operators(a: int, b: int) -> int:
     if b == 0:
@@ -61,6 +76,10 @@ def binary_search(arr: typing.List[int], key: int) -> int:
     return - 1  # was not found
 
 
+def generate_random_array_of_integers(size: int) -> typing.List[int]:
+    return [random.randint(0, 256) for _ in range(size)]
+
+
 if __name__ == '__main__':
     print('fib(5):', fib(5))
     print('fib(12):', fib(12))
@@ -70,6 +89,9 @@ if __name__ == '__main__':
     print('is_prime(673):', is_prime(673))
     print('add_no_arithmetic_operators(5,8):',
           add_no_arithmetic_operators(5, 8))
-    numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 21, 25, 28]
+    numbers = sorted(generate_random_array_of_integers(12))
+    random_number = random.randint(0, len(numbers)-1)
     print(numbers)
-    print('Search for 25:', numbers[binary_search(numbers, 25)])
+    print('Search for numbers[%d] = %d:' % (
+        random_number, numbers[random_number]),
+          numbers[binary_search(numbers, numbers[random_number])])
