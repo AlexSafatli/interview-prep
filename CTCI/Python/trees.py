@@ -42,6 +42,11 @@ class IntegerBinarySearchTreeNode(object):
 
 
 # Minimal height BST
+def generate_minimal_height_bst(arr: typing.List[int]
+                                ) -> IntegerBinarySearchTreeNode:
+    return get_midpt_of_array_as_node(arr, 0, len(arr)-1)
+
+
 def get_midpt_of_array_as_node(arr: typing.List[int], start: int, end: int) -> \
         typing.Optional[IntegerBinarySearchTreeNode]:
     if end < start:
@@ -54,6 +59,5 @@ def get_midpt_of_array_as_node(arr: typing.List[int], start: int, end: int) -> \
 
 
 if __name__ == '__main__':
-    b = get_midpt_of_array_as_node(list(range(2, 7)), 0, 5 - 1)
-    print(b)
+    print(generate_minimal_height_bst(list(range(2, 7))))
 
