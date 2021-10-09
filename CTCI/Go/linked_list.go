@@ -24,11 +24,11 @@ func NewLinkedList() *LinkedList {
 }
 
 func (list *LinkedList) GetTail() *Node {
-	if (list.head == nil) {
+	if list.head == nil {
 		return nil
 	}
-	var cursor *Node = list.head
-	for ; cursor.next != nil ; {
+	var cursor = list.head
+	for cursor.next != nil {
 		cursor = cursor.next
 	}
 	return cursor
@@ -40,7 +40,7 @@ func (list *LinkedList) AppendToTail(data int) {
 }
 
 func (list *LinkedList) AppendNodeToTail(node *Node) {
-	if (list.head == nil) {
+	if list.head == nil {
 		list.head = node
 	} else {
 		list.GetTail().next = node
