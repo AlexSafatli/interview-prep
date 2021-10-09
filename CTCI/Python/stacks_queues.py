@@ -88,6 +88,16 @@ class MaxStack(Stack):
         super().push(dat)
 
 
+# 3.1, Divide the array into 3 parts of equal size. Stack grows in those (limited) spaces.
+#  [0,n/3)
+#  [n/3,2n/3)
+#  [2n/3,n)
+# Assumes: no knowledge of space usage. Cannot use any extra space (resizable array?).
+# 3.2, Have nodes keep track of min, or Stack class keep track on addition/deletion (problem here is on deletion).
+# 3.3, Rollover, see solution. *
+# 3.4, Towers of Hanoi (see separate file).
+
+
 if __name__ == '__main__':
     s = Stack()
     s.push('Door')

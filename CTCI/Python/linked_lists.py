@@ -131,6 +131,14 @@ class Adder(object):
         return ans
 
 
+# NOT IMPLEMENTED
+# ---------------
+# 2.2, keep two pointers n distance apart and increment them together.
+# 2.3, delete a node in place (copy data of next node into current node, delete that one).
+# 2.4, think of an adder. ***
+# 2.5, two pointers moving at different speeds.
+
+
 if __name__ == '__main__':
     l: LinkedList = LinkedList()
     l.append_to_tail('door')

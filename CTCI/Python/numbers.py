@@ -76,6 +76,9 @@ def binary_search(arr: typing.List[int], key: int) -> int:
     return - 1  # was not found
 
 
+# 19.3 (pg 268); determine number of zeroes in n factorial by counting multiples of 5.
+
+
 def generate_random_array_of_integers(size: int) -> typing.List[int]:
     return [random.randint(0, 256) for _ in range(size)]
 

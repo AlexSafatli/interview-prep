@@ -108,6 +108,10 @@ def transpose_square_matrix_in_place(mat):
             # swap mat[m][n] with mat[n][m]
             mat[m][n], mat[n][m] = mat[n][m], mat[m][n]
 
+# Rotating matrices.
+# - Rotate by +90: transpose, reverse rows.
+# - Rotate by -90: transpose, reverse columns.
+
 
 # Testing Function
 def call_one_arg_func(f, s: str):
