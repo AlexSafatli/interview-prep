@@ -1,5 +1,5 @@
 CPP_FILE=acidTests.cpp
-PY_FILE=acidTests.py
+PY_FILE=acid_tests.py
 CPP_OUT=acidTests.out
 
 test: ${CPP_FILE} ${PY_FILE}
