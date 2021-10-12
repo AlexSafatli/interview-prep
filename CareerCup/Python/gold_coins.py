@@ -11,9 +11,12 @@ def max_coins(pots, lo, up, f) -> int:
         return 0
     if f[lo][up] is not None:
         return f[lo][up]
-    F = lambda i, j: max_coins(pots, i, j, f)
-    start = pots[lo] + min([F(lo + 2, up), F(lo + 1, up - 1)])
-    end = pots[up] + min([F(lo, up - 2), F(lo + 1, up - 1)])
+
+    def _max_coins(i, j):
+        return max_coins(pots, i, j, f)
+
+    start = pots[lo] + min([_max_coins(lo + 2, up), _max_coins(lo + 1, up - 1)])
+    end = pots[up] + min([_max_coins(lo, up - 2), _max_coins(lo + 1, up - 1)])
     f[lo][up] = max([start, end])
     return f[lo][up]
 
