@@ -1,3 +1,6 @@
+import typing
+
+
 class TowerBreakersState(object):
     def __init__(self, n: int, m: int):
         self.towers = [m] * n
@@ -29,6 +32,26 @@ class Caesar(object):
         return ''.join(li)
 
 
+class TextEditor(object):
+    def __init__(self):
+        self.text = ''
+        self._edits: typing.List[str] = []
+
+    def append(self, w: str):
+        self._edits.append(self.text)
+        self.text = ''.join([self.text, w])
+
+    def delete(self, k: int):
+        self._edits.append(self.text)
+        self.text = self.text[:-k]
+
+    def print(self, k: int):
+        print(self.text[k-1])
+
+    def undo(self):
+        self.text = self._edits.pop()
+
+
 def lonely_integer(li: list) -> int:
     # Given array of integers li, all elements but one occur twice
     ints = {}
@@ -43,7 +66,7 @@ def lonely_integer(li: list) -> int:
     return -1
 
 
-def diag_diff(mat: list) -> int:
+def diag_diff(mat: typing.List[list]) -> int:
     # Given square matrix mat, want absolute difference between sum of its diags
     l_diag_sum = 0
     r_diag_sum = 0
@@ -85,7 +108,7 @@ def caesar_encrypt(s: str, k: int) -> str:
     return c.encrypt(k)
 
 
-def grid_challenge(grid: list) -> bool:
+def grid_challenge(grid: typing.List[list]) -> bool:
     # Given square grid of characters (a-z), rearrange eles of ea row lex (asc)
     # Determine if th ecolumns are also in ascending alpha order (top->bot)
     # Returns true or false
@@ -97,7 +120,7 @@ def grid_challenge(grid: list) -> bool:
     return True
 
 
-def new_year_chaos_min_brides(q: list) -> int:
+def new_year_chaos_min_brides(q: typing.List[int]) -> int:
     # Is New Year's Day, people are in line for Wonderland rollercoast ride.
     # Each person wears sticker indicating init. position in queue (1 to n).
     # Any person can bribe person directly in front of them to swap pos, but
@@ -149,7 +172,7 @@ def brackets_are_balanced(s: str) -> bool:
     return len(stack) == 0
 
 
-def queue_using_two_stacks(stacks, op: int, ele: str):
+def queue_using_two_stacks(stacks: typing.List[list], op: int, ele: str):
     # Process a query of type op with possible ele data
     # Queries:
     #   1 x - Enqueue x into end of queue
@@ -168,3 +191,28 @@ def queue_using_two_stacks(stacks, op: int, ele: str):
             print(stacks[1][-1])
         else:
             print(stacks[0][0])
+
+
+def simple_text_editor(ops: typing.List[str]):
+    # Perform q number of operations where q =
+    #   1. append(W) - append W to end of string
+    #   2. delete(k) - delete last k chars of string
+    #   3. print(k) - print kth char
+    #   4. undo() - undo last op
+    # this will take too long if list of ops is long
+    editor = TextEditor()
+    while len(ops) > 0:
+        op = ops[0]
+        if len(ops) > 1:
+            ops = ops[1:]
+        else:
+            ops = []
+        op_code = int(op[0])
+        if op_code == 1:
+            editor.append(op[2:])
+        elif op_code == 2:
+            editor.delete(int(op[2:]))
+        elif op_code == 3:
+            editor.print(int(op[2:]))
+        elif op_code == 4:
+            editor.undo()
