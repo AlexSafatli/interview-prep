@@ -216,3 +216,66 @@ def simple_text_editor(ops: typing.List[str]):
             editor.print(int(op[2:]))
         elif op_code == 4:
             editor.undo()
+
+
+def lego_blocks():
+    # Have an infinite number of 4 types of lego blocks of sizes (depth*h*w):
+    #  d  h  w
+    #  1  1  1
+    #  1  1  2
+    #  1  1  3
+    #  1  1  4
+    #
+    # Using these, want to make a wall of height n, width m with features:
+    #  - no holes
+    #  - one solid structure; no straight vertical break
+    #  - bricks must be laid horizontally
+    # Want to find out how many ways such a wall can be built mod 10^9+7
+    #
+    # Example: n, m = 2, 2
+    #
+    # Have 3 possible configurations:
+    # -- ** --
+    # -- -- **
+    #
+    # where * = 1x1 block and -- is a 1x2 block
+    #
+    # This problem is effectively how to use the 4 types of blocks to solidly
+    # cover a h*w rectangle without holes or overlapping.
+    #
+    # See lego_blocks.pdf in ../Editorials/ for details on the solution.
+    mod = 1000000007
+
+    def _pow(a: int, p: int) -> int:
+        ans = 1
+        while p:
+            if p % 2:
+                ans = ans * a % mod
+            a = a * a % mod
+            p = int(p/2)
+        return ans
+
+    t = int(input())
+    f = [0] * 1111
+    g = [0] * 1111
+
+    f[0] = 1
+    for i in range(1, 1001):
+        for j in range(1, 5):
+            if i - j >= 0:
+                f[i] = (f[i] + f[i-j]) % mod
+    for _ in range(t):
+        line = input()
+        spl = line.split(' ')
+        n, m = int(spl[0]), int(spl[1])
+        for i in range(1, m+1):
+            g[i] = _pow(f[i], n)
+        h = [0] * 1111
+        h[1] = 1
+        for i in range(2, m+1):
+            h[i] = g[i]
+            tmp = 0
+            for j in range(1, i):
+                tmp = (tmp + h[j] * g[i-j]) % mod
+            h[i] = (h[i] - tmp + mod) % mod
+        print(h[m])
