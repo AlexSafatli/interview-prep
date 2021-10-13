@@ -110,6 +110,8 @@ def new_year_chaos_min_brides(q: list) -> int:
     #
     # This function returns -1 for "Too chaotic", otherwise #/bribes
     bribes = 0
+    if len(q) <= 1:
+        return 0
     for i in range(len(q)-1, -1, -1):  # will correct array going backwards
         if i + 1 != q[i]:  # i+1 is initial state expected value
             if i - 1 >= 0 and q[i-1] == i + 1:  # 1-pos bribe
@@ -145,3 +147,24 @@ def brackets_are_balanced(s: str) -> bool:
             else:
                 return False
     return len(stack) == 0
+
+
+def queue_using_two_stacks(stacks, op: int, ele: str):
+    # Process a query of type op with possible ele data
+    # Queries:
+    #   1 x - Enqueue x into end of queue
+    #   2 - Dequeue element at front of queue
+    #   3 - Print element at front of queue
+    if op == 1:
+        stacks[0].append(ele)
+    elif op == 2:
+        if len(stacks[1]) > 0:
+            return stacks[1].pop()
+        while len(stacks[0]) > 1:
+            stacks[1].append(stacks[0].pop())
+        return stacks[0].pop()
+    elif op == 3:
+        if len(stacks[1]) > 0:
+            print(stacks[1][-1])
+        else:
+            print(stacks[0][0])
