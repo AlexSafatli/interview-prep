@@ -1,3 +1,4 @@
+import heapq
 import typing
 
 
@@ -14,6 +15,12 @@ class TowerBreakersState(object):
                     self.towers[i] = y
                     return True
         return False
+
+
+class SinglyLinkedListNode(object):
+    def __init__(self, data):
+        self.next: typing.Optional[SinglyLinkedListNode] = None
+        self.data = data
 
 
 class Caesar(object):
@@ -279,3 +286,71 @@ def lego_blocks():
                 tmp = (tmp + h[j] * g[i-j]) % mod
             h[i] = (h[i] - tmp + mod) % mod
         print(h[m])
+
+
+def cookies(k: int, li: typing.List[int]) -> int:
+    # Jesse loves cookies, wants sweetness of some cookies to be > k.
+    # To do this, two cookies least sweatness repeatedly mixed so that:
+    #   sweetness = (1 * least sweet + 2 * 2nd least sweet)
+    # This occurs until all cookies have a sweetness >= k
+    # k = threshold, li = array of sweetness values
+    # returns min. # of operations or -1 if not possible
+    heapq.heapify(li)
+    num_ops = 0
+    while True:
+        ls = heapq.heappop(li)
+        if ls >= k:
+            return num_ops  # sweetness = least sweet
+        if len(li) == 0:
+            return -1  # not possible (cannot make them uniform sweetness)
+        sls = heapq.heappop(li)
+        ns = ls + 2*sls
+        heapq.heappush(li, ns)
+        num_ops += 1
+
+
+def flipping_matrix(li: list) -> int:
+    # Maximum sum of top-left quadrant
+    _sum = 0
+    n, m = len(li), len(li[0])
+    for i in range(0, int(n/2)):
+        for j in range(0, int(m/2)):
+            cur = li[i][j]
+            right = li[i][m-j-1]
+            down = li[n-i-1][j]
+            diag = li[n-i-1][m-j-1]
+            ans = max(cur, right, down, diag)
+            _sum += ans
+    return _sum
+
+
+def merge_two_sorted_linked_lists(head1: typing.Optional[SinglyLinkedListNode],
+                                  head2: typing.Optional[SinglyLinkedListNode]):
+    cursor3 = None
+    new_list_head = None
+    if head1 is None:
+        return head2
+    if head2 is None:
+        return head1
+    cursor1 = head1
+    cursor2 = head2
+    while cursor1 is not None or cursor2 is not None:
+        compare = None
+        if cursor1 is not None:
+            compare = cursor1.data if compare is None else min(cursor1.data,
+                                                               compare)
+        if cursor2 is not None:
+            compare = cursor2.data if compare is None else min(cursor2.data,
+                                                               compare)
+        if compare is not None:
+            if cursor1 is not None and compare == cursor1.data:
+                cursor1 = cursor1.next
+            elif cursor2 is not None and compare == cursor2.data:
+                cursor2 = cursor2.next
+            if new_list_head is None:
+                new_list_head = SinglyLinkedListNode(compare)
+                cursor3 = new_list_head
+            else:
+                cursor3.next = SinglyLinkedListNode(compare)
+                cursor3 = cursor3.next
+    return new_list_head
