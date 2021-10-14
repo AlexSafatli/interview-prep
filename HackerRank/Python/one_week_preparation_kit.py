@@ -103,6 +103,7 @@ def frequency_arr_generic(li: list, max_val: int) -> list:
     return freq_arr
 
 
+# @*
 def tower_breakers(n: int, m: int) -> int:
     # Resolve a game of Tower Breakers.
     # - Initially there are n towers, each of height m
@@ -167,9 +168,10 @@ def new_year_chaos_min_brides(q: typing.List[int]) -> int:
 
 
 def brackets_are_balanced(s: str) -> bool:
+    opening_brackets = ['{', '[', '(']
     stack = []  # maintain a stack of brackets
     for sym in s:
-        if sym in ['{', '[', '(']:  # opening bracket
+        if sym in opening_brackets:
             stack.append(sym)  # push
         else:
             if len(stack) > 0:
@@ -208,6 +210,7 @@ def queue_using_two_stacks(stacks: typing.List[list], op: int, ele: str):
             print(stacks[0][0])
 
 
+# @* lesson here was make sure to invalidate cache
 def simple_text_editor(ops: typing.List[str]):
     # Perform q number of operations where q =
     #   1. append(W) - append W to end of string
@@ -233,6 +236,7 @@ def simple_text_editor(ops: typing.List[str]):
             editor.undo()
 
 
+# @*
 def lego_blocks():
     # Have an infinite number of 4 types of lego blocks of sizes (depth*h*w):
     #  d  h  w
@@ -258,7 +262,7 @@ def lego_blocks():
     # This problem is effectively how to use the 4 types of blocks to solidly
     # cover a h*w rectangle without holes or overlapping.
     #
-    # See lego_blocks.pdf in ../Editorials/ for details on the solution.
+    # See lego_blocks.pdf in ../Editorials/ for details on the solution (DP).
     mod = 1000000007
 
     def _pow(a: int, p: int) -> int:
@@ -267,7 +271,7 @@ def lego_blocks():
             if p % 2:
                 ans = ans * a % mod
             a = a * a % mod
-            p = int(p/2)
+            p = p // 2
         return ans
 
     t = int(input())
