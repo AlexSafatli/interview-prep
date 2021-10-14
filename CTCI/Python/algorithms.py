@@ -118,8 +118,7 @@ def all_subsets_of_a_set(li, index: int):
     all_subsets = all_subsets_of_a_set(li, index + 1)
     subsets = []
     for subset in all_subsets:
-        new = []
-        new.extend(subset)
+        new = [s for s in subset]
         new.append(li[index])
         subsets.append(new)
     all_subsets.extend(subsets)
