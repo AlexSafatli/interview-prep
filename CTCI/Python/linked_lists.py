@@ -46,6 +46,9 @@ class LinkedList(object):
         self.append_node_to_tail(n)
         return n
 
+    def append(self, dat):
+        return self.append_to_tail(dat)
+
     def delete_node(self, n: Node):
         cursor = self.head
         if cursor is not None:
@@ -92,12 +95,12 @@ class Adder(object):
     def __init__(self, a: int, b: int):
         self.a = a
         self.b = b
-        self.li_a = LinkedList()
-        self.li_b = LinkedList()
+        self._li_a = LinkedList()
+        self._li_b = LinkedList()
         for digit in str(a):
-            self.li_a.append_to_head(digit)
+            self._li_a.append_to_head(digit)
         for digit in str(b):
-            self.li_b.append_to_head(digit)
+            self._li_b.append_to_head(digit)
 
     @staticmethod
     def _add(n_a: Node, n_b: Node, carry: int):
@@ -105,7 +108,7 @@ class Adder(object):
             return None
 
         # Make new node
-        result = Node(carry)
+        n = Node(carry)
         ans = carry
 
         # Check either node
@@ -113,43 +116,44 @@ class Adder(object):
             ans += int(n_a.data)
         if n_b is not None:
             ans += int(n_b.data)
-        result.data = ans % 10
-
-        # Recurse
-        result.next = Adder._add(n_a.next if n_a is not None else None,
-                                 n_b.next if n_b is not None else None,
-                                 int(ans/10))
-        return result
+        n.data = ans % 10
+        n.next = Adder._add(n_a.next if n_a is not None else None,
+                            n_b.next if n_b is not None else None,
+                            ans // 10)
+        return n
 
     def add(self) -> LinkedList:
         ans = LinkedList()
-        if self.li_a.head is None:
-            return self.li_b
-        if self.li_b.head is None:
-            return self.li_a
-        ans.head = Adder._add(self.li_a.head, self.li_b.head, 0)
+        if self._li_a.head is None:
+            return self._li_b
+        if self._li_b.head is None:
+            return self._li_a
+        ans.head = self._add(self._li_a.head, self._li_b.head, 0)
         return ans
 
 
 # NOT IMPLEMENTED
 # ---------------
 # 2.2, keep two pointers n distance apart and increment them together.
-# 2.3, delete a node in place (copy data of next node into current node, delete that one).
+# 2.3, delete a node in place (copy data of next node into current node, delete
+# that one).
 # 2.4, think of an adder. ***
 # 2.5, two pointers moving at different speeds.
 
 
 if __name__ == '__main__':
     l: LinkedList = LinkedList()
-    l.append_to_tail('door')
-    node = l.append_to_tail('car')
-    l.append_to_tail('bee')
-    l.append_to_tail('vee')
+    l.append('door')
+    node = l.append('car')
+    l.append('bee')
+    l.append('vee')
     l.delete_node(node)
-    l.append_to_tail('bee')
-    l.append_to_tail('bee')
-    l.remove_duplicates()
-    print(l)
+    l.append('bee')
+    l.append('bee')
     print('=' * 30 + '\n' + str(l) + '\n' + '=' * 30)
+    l.remove_duplicates()
+    l.append_to_head('radio')
+    print(str(l) + '\n' + '=' * 30)
     a = Adder(120, 29)
-    print(str(a.add()) + '\n' + '=' * 30)
+    ans = a.add()
+    print(str(ans) + '\n' + '=' * 30)

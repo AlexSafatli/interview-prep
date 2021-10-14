@@ -1,14 +1,14 @@
-ASCII_ALPHABET_LEN = 128
 NUM_CELLS = 8
 
 
+# @*
 # Have N number of states in an array where every passing unit time each cell
 # is analyzed for its active/inactive state based on neighbors
 class BinaryNeighborArray:
     def __init__(self, states: list):
         self.states = [-1] * NUM_CELLS
-        for i in range(len(states)):
-            if i >= NUM_CELLS:
+        for i in range(NUM_CELLS):
+            if i >= len(self.states):
                 break
             self.states[i] = states[i]
 
@@ -41,9 +41,9 @@ class BinaryNeighborArray:
 
 def is_unique_characters_bool_arr(s: str) -> bool:
     # assume 128-character (ASCII) alphabet
-    if len(s) > ASCII_ALPHABET_LEN:
+    if len(s) > 128:
         return False
-    found_chars = [False for _ in range(ASCII_ALPHABET_LEN)]
+    found_chars = [False for _ in range(128)]
     for char in s:
         if found_chars[ord(char)]:
             return False  # already found
@@ -51,14 +51,26 @@ def is_unique_characters_bool_arr(s: str) -> bool:
     return True
 
 
-def is_unique_characters(s: str) -> bool:
-    # use a bitvector; assumes a->z
-    bitvector: int = 0
+def is_unique_characters_dict(s: str) -> bool:
+    # uses dictionary
+    found_chars = {}
     for char in s:
-        val: int = ord(char) - ord('a')
-        if bitvector & (1 << val) > 0:
+        if char in found_chars:
+            return False  # already found
+        found_chars[char] = True
+    return True
+
+
+# @*
+def is_unique_characters(s: str) -> bool:
+    # use a bitvector; assumes a->z (this constaint only useful in Java, etc.)
+    # in Python, integers are objects
+    bitvector = 0
+    for c in s:
+        v = 1 << ord(c)
+        if bitvector & v:
             return False
-        bitvector |= 1 << val
+        bitvector |= v
     return True
 
 
@@ -75,7 +87,7 @@ def is_unique_characters_sorting_str(s: str) -> bool:
 
 
 def are_permutations(x, y) -> bool:
-    # works as long as x, y have and a size/are sortable - intended for strings
+    # works as long as x, y have a size/are sortable - intended for strings
     if len(x) != len(y):
         return False
     return sorted(x) == sorted(y)

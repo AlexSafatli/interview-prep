@@ -76,10 +76,9 @@ class TowerOfHanoi(object):
 
 # Mergesort implementation; O(nlgn)
 def mergesort(li):
-    # If a single element, already sorted.
     if len(li) <= 1:
-        return
-    mid = int((len(li)) / 2)
+        return  # already sorted
+    mid = len(li) // 2
     left = li[:mid]
     right = li[mid:]
     mergesort(left)
@@ -109,6 +108,7 @@ def merge(li, left, right):
         k += 1
 
 
+# @*
 # 8.4, all subsets of a set
 def all_subsets_of_a_set(li, index: int):
     # For n > 1, find set of subsets of 1, ..., n+1 then make two copies
@@ -126,24 +126,26 @@ def all_subsets_of_a_set(li, index: int):
     return all_subsets
 
 
+# @*
 # 8.4, all subsets of a set - combinators/binary strings
 def all_subsets_of_a_set_bin(li):
     all_subsets = []
     i = 0  # generate all binary numbers starting with 0
     while i < (1 << len(li)):
         k = i
-        index = 0
+        idx = 0
         subset = []
         while k > 0:
-            if (k & 1) > 0:
-                subset.append(li[index])
+            if k & 1:
+                subset.append(li[idx])
             k >>= 1
-            index += 1
+            idx += 1
         all_subsets.append(subset)
         i += 1
     return all_subsets
 
 
+# @*
 # All permutations of a sequence -- see Algorithms notes (1, p. 17)
 #
 # Pseudocode:
@@ -165,31 +167,30 @@ def all_permutations(p, s):
         all_perms.append(p + s)
     else:
         for v in s:
-            li = []
-            li.extend(s)
+            li = [c for c in s]
             li.remove(v)
             all_perms.extend(all_permutations(p + [v], li))
     return all_perms
 
 
+# @*
 # 8.5, all valid combinations of n-pairs of pantheses of form "( ... )"
-def parantheses(i, r, cnt, str_li, coll):
+def parantheses(i: int, r: int, cnt: int, str_li: list, c: list):
     if i == 0 and r == 0:
-        coll.append(''.join(str_li))
+        c.append(''.join(str_li))
         return  # done
     if i > 0:  # some left "(" to place
         str_li[cnt] = '('
-        parantheses(i - 1, r, cnt + 1, str_li, coll)
+        parantheses(i - 1, r, cnt + 1, str_li, c)
     if r > i:
         str_li[cnt] = ')'
-        parantheses(i, r - 1, cnt + 1, str_li, coll)
+        parantheses(i, r - 1, cnt + 1, str_li, c)
 
 
 def all_parantheses_for_n(n: int) -> str:
-    li = ['*' for _ in range(2 * n)]
-    result = []
-    parantheses(n, n, 0, li, result)
-    return '\n'.join(result)
+    ans = []
+    parantheses(n, n, 0, ['*' for _ in range(2 * n)], ans)
+    return '\n'.join(ans)
 
 
 # 8.2, Robot in a Grid, Uses dynamic programming top-down memoization approach
@@ -209,10 +210,8 @@ def find_path(maze, row: int, col: int, path: list, failed_pts: dict) -> bool:
         return False
 
     pt = (row, col)
-
-    # If already visited
     if pt in failed_pts:
-        return False
+        return False  # already visited
 
     is_at_origin = row == 0 and col == 0
 
@@ -222,16 +221,16 @@ def find_path(maze, row: int, col: int, path: list, failed_pts: dict) -> bool:
         path.append((row, col))
         return True
 
-    # Cache failed results
+    # Cache failed result
     failed_pts[pt] = True
     return False
 
 
-# 8.3, Magic index - given sorted array of distinct ints, find i where A[i] = i
+# 8.3, Magic index - for sorted array of distinct ints, find i where A[i] = i
 def magic_index(li: list, start: int, end: int) -> int:
     if end < start:
         return -1  # not found
-    mid = int((start + end) / 2)
+    mid = (start + end) // 2
     if li[mid] == mid:
         return mid  # found
     elif li[mid] > mid:  # must be on left
@@ -245,21 +244,22 @@ def get_rank_of_number(root: RankNode, num: int):
     return root.get_rank(num)
 
 
+# @*
 # 16.21, Sum Swap - given two arrays of integers, find pair of values (one from
 # each array) that you can swap to give the two arrays the same sum.
 def find_swap_values(li_1: list, li_2: list) -> typing.Optional[tuple]:
-    target = get_target(li_1, li_2)
-    if target is None:
+    target_sum = get_target_sum(li_1, li_2)
+    if target_sum is None:
         return None
-    return find_difference(li_1, li_2, target)
+    return find_difference(li_1, li_2, target_sum)
 
 
-def get_target(li_1: list, li_2: list) -> typing.Optional[int]:
+def get_target_sum(li_1: list, li_2: list) -> typing.Optional[int]:
     sum_1 = sum(li_1)
     sum_2 = sum(li_2)
     if (sum_1 - sum_2) % 2 != 0:
         return None
-    return int((sum_1-sum_2)/2)
+    return (sum_1 - sum_2) // 2
 
 
 def find_difference(li_1: list, li_2: list,

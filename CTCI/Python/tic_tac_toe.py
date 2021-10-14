@@ -14,50 +14,63 @@ class TicTacToeBoard(object):
         self.state = [[None, None, None],
                       [None, None, None],
                       [None, None, None]]
-        self._winner = None
+        self._winner = None  # cache winner to reduce calculations
 
     def __getitem__(self, item):
         return self.state[item]
 
     def set(self, i, j, value):
-        if self.state[i][j] != value and self._winner is not None:
+        if self[i][j] != value and self._winner is not None:
             self._winner = None  # invalidate winner if change made to board
         self.state[i][j] = value
 
-    def check_direction(self, direction=None):
-        if direction == TicTacToeDirection.COLUMN:
-            for i in range(3):
-                piece = self[0][i]
-                if piece is None:
-                    return None
-                if all([piece == self[x][i] for x in range(1, 3)]):
-                    return piece
-            return None
-        elif direction == TicTacToeDirection.ROW:
-            for i in range(3):
-                piece = self[i][0]
-                if piece is None:
-                    return None
-                if all([piece == self[i][x] for x in range(1, 3)]):
-                    return piece
-            return None
-        elif direction == TicTacToeDirection.DIAG:
-            piece = self[0][0]
-            if piece is None:
+    def _check_cols(self):
+        for i in range(3):
+            p = self[0][i]
+            if p is None:
                 return None
-            for i in range(1, 3):
-                if self[i][i] != piece:
-                    return None
-            return piece
-        elif direction == TicTacToeDirection.RDIAG:
-            piece = self[0][2]
-            if piece is None:
-                return None
-            for i in range(1, 3):
-                if self[i][2-i] != piece:
-                    return None
-            return piece
+            if all([p == self[x][i] for x in range(1, 3)]):
+                return p
         return None
+
+    def _check_rows(self):
+        for i in range(3):
+            p = self[i][0]
+            if p is None:
+                return None
+            if all([p == self[i][x] for x in range(1, 3)]):
+                return p
+        return None
+
+    def _check_diag(self):
+        p = self[0][0]
+        if p is None:
+            return None
+        for i in range(1, 3):
+            if self[i][i] != p:
+                return None
+        return p
+
+    def _check_rdiag(self):
+        p = self[0][2]
+        if p is None:
+            return None
+        for i in range(1, 3):
+            if self[i][2 - i] != p:
+                return None
+        return p
+
+    def check_direction(self, direction=None):
+        # Returns the winning value/player or None if there isn't a winner
+        if direction == TicTacToeDirection.COLUMN:
+            return self._check_cols()
+        elif direction == TicTacToeDirection.ROW:
+            return self._check_rows()
+        elif direction == TicTacToeDirection.DIAG:
+            return self._check_diag()
+        elif direction == TicTacToeDirection.RDIAG:
+            return self._check_rdiag()
+        return ''
 
     @property
     def winner(self):

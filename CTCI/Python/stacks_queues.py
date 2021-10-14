@@ -4,14 +4,10 @@ from linked_lists import LinkedList
 
 
 class Stack(LinkedList):
-    def __init__(self):
-        super().__init__()
-
     def pop(self):
         if len(self) > 0:
-            top = self.head
-            data = top.data
-            self.delete_node(top)
+            data = self.head.data
+            self.delete_node(self.head)
             return data
         return None
 
@@ -25,9 +21,6 @@ class Stack(LinkedList):
 
 
 class Queue(LinkedList):
-    def __init__(self):
-        super().__init__()
-
     def enqueue(self, dat):
         self.append_to_tail(dat)
 
@@ -74,7 +67,7 @@ class MaxStack(Stack):
         return self.max_stack.peek()
 
     def pop(self) -> typing.Optional[int]:
-        dat = super().pop()
+        dat = self.pop()
         if self.max() == dat:
             self.max_stack.pop()
         return dat
@@ -85,15 +78,18 @@ class MaxStack(Stack):
                 self.max_stack.push(dat)
         else:
             self.max_stack.push(dat)
-        super().push(dat)
+        self.push(dat)
 
 
-# 3.1, Divide the array into 3 parts of equal size. Stack grows in those (limited) spaces.
+# 3.1, Divide the array into 3 parts of equal size. Stack grows in those
+# (limited) spaces.
 #  [0,n/3)
 #  [n/3,2n/3)
 #  [2n/3,n)
-# Assumes: no knowledge of space usage. Cannot use any extra space (resizable array?).
-# 3.2, Have nodes keep track of min, or Stack class keep track on addition/deletion (problem here is on deletion).
+# Assumes: no knowledge of space usage. Cannot use any extra space (resizable
+# array?).
+# 3.2, Have nodes keep track of min, or Stack class keep track on
+# addition/deletion (problem here is on deletion).
 # 3.3, Rollover, see solution. *
 # 3.4, Towers of Hanoi (see separate file).
 

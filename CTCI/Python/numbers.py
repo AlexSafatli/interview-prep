@@ -12,7 +12,6 @@ def fib(n: int) -> int:
 
 
 def fib_concise(n: int) -> int:
-    # More concise iterative Fibonacci fuction
     up, lo = 1, 0
     for _ in range(n):
         up, lo = up + lo, up
@@ -37,7 +36,6 @@ def is_prime(n: int) -> bool:
 
 
 def is_prime_concise(n: int) -> bool:
-    # More concise version of is_prime
     if n == 2:
         return True
     elif n <= 1 or n % 2 == 0:
@@ -50,6 +48,7 @@ def is_prime_concise(n: int) -> bool:
     return True
 
 
+# @*
 # 20.1 (pg 279); add two numbers NOT using any arithmetic operators.
 def add_no_arithmetic_operators(a: int, b: int) -> int:
     if b == 0:
@@ -60,23 +59,23 @@ def add_no_arithmetic_operators(a: int, b: int) -> int:
 
 
 # Implementation of the binary search algorithm for a list of integers.
-def binary_search(arr: typing.List[int], key: int) -> int:
-    # Assumes already sorted array
-    lower = 0
-    upper = len(arr) - 1
-    mid = int((lower + upper) / 2)
-    while arr[mid] != key and lower < upper:
-        if key < arr[mid]:
-            upper = mid - 1
-        elif key > arr[mid]:
-            lower = mid + 1
-        mid = int((lower + upper) / 2)
-    if lower <= upper:  # number was found
-        return mid
-    return - 1  # was not found
+def binary_search(a: typing.List[int], key: int) -> int:
+    # Assumes sorted array.
+    lo, up = 0, len(a) - 1
+    mi = lo + up // 2
+    while a[mi] != key and lo < up:
+        if key < a[mi]:
+            up = mi - 1
+        elif key > a[mi]:
+            lo = mi + 1
+        mi = lo + up // 2
+    if lo <= up:
+        return mi
+    return -1
 
 
-# 19.3 (pg 268); determine number of zeroes in n factorial by counting multiples of 5.
+# 19.3 (pg 268); determine number of zeroes in n factorial by counting
+# multiples of 5.
 
 
 def generate_random_array_of_integers(size: int) -> typing.List[int]:
