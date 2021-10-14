@@ -36,4 +36,5 @@ other techniques outlined in respective `README` files.
 Certain shorthand is used in some comments. For example, `@REP` indicates that 
 a particular problem or structure in code has been found in another resource or 
 problem set. This is followed by where and how it can be found in that 
-resource.
+resource. Another important shorthand I use is `@*` which indicates a problem I 
+found to be difficult or consider to be a very hard problem.

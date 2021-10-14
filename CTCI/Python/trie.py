@@ -15,7 +15,7 @@ class LowercaseTrieNode(object):
         self.last: bool = False
 
 
-class Trie(object):
+class Trie(object):  # currently implemented using HashTrieNode
     def __init__(self):
         self.root = HashTrieNode()
         self._word_list = []
