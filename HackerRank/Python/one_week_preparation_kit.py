@@ -23,6 +23,14 @@ class SinglyLinkedListNode(object):
         self.data = data
 
 
+class HuffmanTreeNode(object):
+    def __init__(self, freq, data):
+        self.freq = freq
+        self.data = data
+        self.left = None
+        self.right = None
+
+
 class Caesar(object):
     def __init__(self, s: str):
         self.text = s
@@ -354,3 +362,17 @@ def merge_two_sorted_linked_lists(head1: typing.Optional[SinglyLinkedListNode],
                 cursor3.next = SinglyLinkedListNode(compare)
                 cursor3 = cursor3.next
     return new_list_head
+
+
+def decode_huffman(root: HuffmanTreeNode, s: str) -> str:
+    ans = ''
+    cursor = root
+    for i in range(0, len(s)):
+        if s[i] == '0':
+            cursor = cursor.left
+        else:
+            cursor = cursor.right
+        if cursor.left is None and cursor.right is None:  # leaf node
+            ans += cursor.data
+            cursor = root
+    return ans
