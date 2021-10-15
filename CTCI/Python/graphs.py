@@ -6,12 +6,12 @@ class DirectionalGraph(object):
         self.adj: dict = {}
         self.size = 0
 
+    def __len__(self) -> int:
+        return self.size
+
     def add_vertex(self, key):
         self.adj[key] = []
         self.size += 1
-
-    def __len__(self) -> int:
-        return self.size
 
     def get_neighbors(self, key) -> list:
         return self.adj[key]
