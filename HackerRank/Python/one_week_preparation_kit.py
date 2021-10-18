@@ -3,6 +3,7 @@ import typing
 
 
 class TowerBreakersState(object):
+    # First pass/initial struct design for this problem; inefficient
     def __init__(self, n: int, m: int):
         self.towers = [m] * n
 
@@ -31,6 +32,56 @@ class HuffmanTreeNode(object):
         self.right = None
 
 
+class TrieNode(object):
+    def __init__(self):
+        self.children = {}
+        self.first_child = None
+        self.word = ''
+
+
+class Trie(object):
+    def __init__(self, strs: typing.List[str]):
+        self.root = TrieNode()
+        for s in strs:
+            self.insert(s)
+
+    def insert(self, word: str):
+        cursor = self.root
+        for ch in word:
+            if ch not in cursor.children:
+                node = TrieNode()
+                cursor.children[ch] = node
+                if len(cursor.children) == 1:
+                    cursor.first_child = node
+            cursor = cursor.children[ch]
+        cursor.word = word
+
+    def insert_with_prefix_check(self, word: str) -> bool:
+        cursor = self.root
+        ok = True
+        for i, ch in enumerate(word):
+            if i == len(word) - 1 and ch in cursor.children:
+                ok = False
+            if ch not in cursor.children:
+                node = TrieNode()
+                cursor.children[ch] = node
+                if len(cursor.children) == 1:
+                    cursor.first_child = node
+            cursor = cursor.children[ch]
+            if len(cursor.word):
+                ok = False
+        cursor.word = word
+        return ok
+
+    def is_prefix_or_word(self, word: str) -> bool:
+        cursor = self.root
+        for ch in word:
+            if ch not in cursor.children:
+                return False
+            cursor = cursor.children[ch]
+        return True
+
+
 class Caesar(object):
     def __init__(self, s: str):
         self.text = s
@@ -40,8 +91,8 @@ class Caesar(object):
         li = []
         for i in self.text:
             if i.isalpha():
-                offset = 65 if i.isupper() else 97
-                li.append(chr((ord(i) + (n-offset)) % 26 + offset))
+                li.append(
+                    caesar_shift_char_by_n(i, n, 65 if i.isupper() else 97))
             else:
                 li.append(i)
         return ''.join(li)
@@ -52,12 +103,15 @@ class TextEditor(object):
         self.text = ''
         self._edits: typing.List[str] = []
 
-    def append(self, w: str):
+    def _cache_state(self):
         self._edits.append(self.text)
+
+    def append(self, w: str):
+        self._cache_state()
         self.text = ''.join([self.text, w])
 
     def delete(self, k: int):
-        self._edits.append(self.text)
+        self._cache_state()
         self.text = self.text[:-k]
 
     def print(self, k: int):
@@ -103,7 +157,7 @@ def frequency_arr_generic(li: list, max_val: int) -> list:
     return freq_arr
 
 
-# @*
+# @* do not need any objects, break down
 def tower_breakers(n: int, m: int) -> int:
     # Resolve a game of Tower Breakers.
     # - Initially there are n towers, each of height m
@@ -117,6 +171,10 @@ def tower_breakers(n: int, m: int) -> int:
     #     player = (player % 2) + 1
     # return (player % 2) + 1
     return 2 if n % 2 == 0 or m == 1 else 1
+
+
+def caesar_shift_char_by_n(i: str, n: int, offset: int) -> str:
+    return chr((ord(i) + (n - offset)) % 26 + offset)
 
 
 def caesar_encrypt(s: str, k: int) -> str:
@@ -211,20 +269,14 @@ def queue_using_two_stacks(stacks: typing.List[list], op: int, ele: str):
 
 
 # @* lesson here was make sure to invalidate cache
-def simple_text_editor(ops: typing.List[str]):
+def simple_text_editor(ops: typing.Iterable[str]):
     # Perform q number of operations where q =
     #   1. append(W) - append W to end of string
     #   2. delete(k) - delete last k chars of string
     #   3. print(k) - print kth char
     #   4. undo() - undo last op
-    # this will take too long if list of ops is long
     editor = TextEditor()
-    while len(ops) > 0:
-        op = ops[0]
-        if len(ops) > 1:
-            ops = ops[1:]
-        else:
-            ops = []
+    for op in ops:
         op_code = int(op[0])
         if op_code == 1:
             editor.append(op[2:])
@@ -284,9 +336,8 @@ def lego_blocks():
             if i - j >= 0:
                 f[i] = (f[i] + f[i-j]) % mod
     for _ in range(t):
-        line = input()
-        spl = line.split(' ')
-        n, m = int(spl[0]), int(spl[1])
+        line = input().split(' ')
+        n, m = int(line[0]), int(line[1])
         for i in range(1, m+1):
             g[i] = _pow(f[i], n)
         h = [0] * 1111
@@ -380,3 +431,16 @@ def decode_huffman(root: HuffmanTreeNode, s: str) -> str:
             ans += cursor.data
             cursor = root
     return ans
+
+
+def no_prefix_set(words: typing.List[str]) -> str:
+    # Given list of strings where ea. string contains a-j inclusive. Set of
+    # strings said to be GOOD SET if no string is a prefix of another one.
+    # Otherwise it is a BAD SET. If two strings are identical, they are
+    # prefixes of one another.
+    t = Trie([])
+    for s in words:
+        ok = t.insert_with_prefix_check(s)
+        if not ok:
+            return s
+    return ''

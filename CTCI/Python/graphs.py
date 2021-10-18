@@ -26,7 +26,7 @@ class DirectionalGraph(object):
         # DFS uses Stack, BFS uses Queue
         stack = Stack()
         visited = []
-        stack.push((key_1, []))
+        stack.push((key_1, []))  # start with empty path
         while len(stack):
             cur, path = stack.pop()
             path.append(cur)
