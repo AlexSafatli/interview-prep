@@ -374,7 +374,7 @@ def cookies(k: int, li: typing.List[int]) -> int:
 
 def flipping_matrix(li: list) -> int:
     # Maximum sum of top-left quadrant
-    _sum = 0
+    s = 0
     n, m = len(li), len(li[0])
     for i in range(0, int(n/2)):
         for j in range(0, int(m/2)):
@@ -383,8 +383,8 @@ def flipping_matrix(li: list) -> int:
             down = li[n-i-1][j]
             diag = li[n-i-1][m-j-1]
             ans = max(cur, right, down, diag)
-            _sum += ans
-    return _sum
+            s += ans
+    return s
 
 
 def merge_two_sorted_linked_lists(head1: typing.Optional[SinglyLinkedListNode],
