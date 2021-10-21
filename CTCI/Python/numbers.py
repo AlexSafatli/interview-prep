@@ -2,6 +2,12 @@ import typing
 import random
 
 
+def gcd(a: int, b: int) -> int:
+    if b == 0:
+        return a
+    return gcd(b, a % b)
+
+
 def fib(n: int) -> int:
     """Finds the nth Fibonacci number, iterative."""
     up, lo = 1, 0
@@ -62,15 +68,15 @@ def add_no_arithmetic_operators(a: int, b: int) -> int:
 def binary_search(a: typing.List[int], key: int) -> int:
     # Assumes sorted array.
     lo, up = 0, len(a) - 1
-    mi = lo + up // 2
-    while a[mi] != key and lo < up:
-        if key < a[mi]:
-            up = mi - 1
-        elif key > a[mi]:
-            lo = mi + 1
-        mi = lo + up // 2
+    m = (lo + up) // 2
+    while a[m] != key and lo < up:
+        if key < a[m]:
+            up = m - 1
+        elif key > a[m]:
+            lo = m + 1
+        m = (lo + up) // 2
     if lo <= up:
-        return mi
+        return m
     return -1
 
 
@@ -83,6 +89,7 @@ def generate_random_array_of_integers(size: int) -> typing.List[int]:
 
 
 if __name__ == '__main__':
+    print('gcd(12, 32): ', gcd(32, 12))
     print('fib(5):', fib(5))
     print('fib(12):', fib(12))
     print('fib_concise(5):', fib_concise(5))
@@ -94,6 +101,6 @@ if __name__ == '__main__':
     numbers = sorted(generate_random_array_of_integers(12))
     random_number = random.randint(0, len(numbers)-1)
     print(numbers)
-    print('Search for numbers[%d] = %d:' % (
-        random_number, numbers[random_number]),
-          numbers[binary_search(numbers, numbers[random_number])])
+    print('Search for numbers[%d] = %d:' % (random_number,
+                                            numbers[random_number]), end=' ')
+    print(numbers[binary_search(numbers, numbers[random_number])])

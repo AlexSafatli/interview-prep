@@ -118,7 +118,7 @@ def all_subsets_of_a_set(li, index: int):
     all_subsets = all_subsets_of_a_set(li, index + 1)
     subsets = []
     for subset in all_subsets:
-        new = [s for s in subset]
+        new = [_ for _ in subset]
         new.append(li[index])
         subsets.append(new)
     all_subsets.extend(subsets)
@@ -166,7 +166,7 @@ def all_permutations(p, s):
         all_perms.append(p + s)
     else:
         for v in s:
-            li = [c for c in s]
+            li = [_ for _ in s]
             li.remove(v)
             all_perms.extend(all_permutations(p + [v], li))
     return all_perms
@@ -254,28 +254,23 @@ def find_swap_values(li_1: list, li_2: list) -> typing.Optional[tuple]:
 
 
 def get_target_sum(li_1: list, li_2: list) -> typing.Optional[int]:
-    sum_1 = sum(li_1)
-    sum_2 = sum(li_2)
-    if (sum_1 - sum_2) % 2 != 0:
+    s1 = sum(li_1)
+    s2 = sum(li_2)
+    if (s1 - s2) % 2 != 0:
         return None
-    return (sum_1 - sum_2) // 2
+    return (s1 - s2) // 2
 
 
 def find_difference(li_1: list, li_2: list,
                     target: int) -> typing.Optional[tuple]:
-    contents_2 = get_contents(li_2)
+    contents_2 = {}
+    for j in li_2:
+        contents_2[j] = True
     for i in li_1:
         k = i - target
         if k in contents_2:
             return i, k
     return None
-
-
-def get_contents(li: list) -> dict:
-    hash_dict = {}
-    for i in li:
-        hash_dict[i] = True
-    return hash_dict
 
 
 if __name__ == '__main__':
