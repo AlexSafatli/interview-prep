@@ -38,6 +38,13 @@ class TrieNode(object):
         self.first_child = None
         self.word = ''
 
+    def insert_char(self, ch: str):
+        if ch not in self.children:
+            node = TrieNode()
+            self.children[ch] = node
+            if len(self.children) == 1:
+                self.first_child = node
+
 
 class Trie(object):
     def __init__(self, strs: typing.List[str]):
@@ -48,11 +55,7 @@ class Trie(object):
     def insert(self, word: str):
         cursor = self.root
         for ch in word:
-            if ch not in cursor.children:
-                node = TrieNode()
-                cursor.children[ch] = node
-                if len(cursor.children) == 1:
-                    cursor.first_child = node
+            cursor.insert_char(ch)
             cursor = cursor.children[ch]
         cursor.word = word
 
@@ -62,11 +65,7 @@ class Trie(object):
         for i, ch in enumerate(word):
             if i == len(word) - 1 and ch in cursor.children:
                 ok = False
-            if ch not in cursor.children:
-                node = TrieNode()
-                cursor.children[ch] = node
-                if len(cursor.children) == 1:
-                    cursor.first_child = node
+            cursor.insert_char(ch)
             cursor = cursor.children[ch]
             if len(cursor.word):
                 ok = False
@@ -103,15 +102,12 @@ class TextEditor(object):
         self.text = ''
         self._edits: typing.List[str] = []
 
-    def _cache_state(self):
-        self._edits.append(self.text)
-
     def append(self, w: str):
-        self._cache_state()
+        self._edits.append(self.text)
         self.text = ''.join([self.text, w])
 
     def delete(self, k: int):
-        self._cache_state()
+        self._edits.append(self.text)
         self.text = self.text[:-k]
 
     def print(self, k: int):
@@ -151,10 +147,10 @@ def frequency_arr_0_to_100(li: list) -> list:
 
 
 def frequency_arr_generic(li: list, max_val: int) -> list:
-    freq_arr = [0] * max_val
+    f = [0] * max_val
     for v in li:
-        freq_arr[v] += 1
-    return freq_arr
+        f[v] += 1
+    return f
 
 
 # @* do not need any objects, break down
