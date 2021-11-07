@@ -194,7 +194,7 @@ def grid_challenge(grid: typing.List[list]) -> bool:
     return True
 
 
-def new_year_chaos_min_brides(q: typing.List[int]) -> int:
+def new_year_chaos_min_bribes(q: typing.List[int]) -> int:
     # Is New Year's Day, people are in line for Wonderland rollercoast ride.
     # Each person wears sticker indicating init. position in queue (1 to n).
     # Any person can bribe person directly in front of them to swap pos, but
@@ -440,7 +440,6 @@ def no_prefix_set(words: typing.List[str]) -> str:
     # prefixes of one another.
     t = Trie([])
     for s in words:
-        ok = t.insert_with_prefix_check(s)
-        if not ok:
+        if not t.insert_with_prefix_check(s):
             return s
     return ''

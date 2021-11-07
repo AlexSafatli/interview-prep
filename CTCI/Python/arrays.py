@@ -13,25 +13,25 @@ class BinaryNeighborArray:
             self.states[i] = states[i]
 
     def _pass_time(self):
-        new_states = [state for state in self.states]
+        _states = [_ for _ in self.states]
         start, end = 0, NUM_CELLS - 1
 
         # Update all states simultaneously
         for i in range(NUM_CELLS):
             # Check for left edge
             if i == start and self.states[2] == 0:
-                new_states[i] = 0
+                _states[i] = 0
             # Check for right edge
             elif i == end and self.states[NUM_CELLS-2] == 0:
-                new_states[i] = 0
+                _states[i] = 0
             # Both inactive or active
             elif i != start and i != end and \
                     self.states[i + 1] == self.states[i - 1]:
-                new_states[i] = 0
+                _states[i] = 0
             else:
-                new_states[i] = 1
+                _states[i] = 1
 
-        self.states = new_states
+        self.states = _states
 
     def pass_time(self, num_units=1):
         for _ in range(num_units):
