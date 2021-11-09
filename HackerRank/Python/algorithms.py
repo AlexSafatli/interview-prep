@@ -1,5 +1,7 @@
 import math
 
+from common import *
+
 
 def compare_triplets(a: tuple, b: tuple) -> list:
     # Rating is a triplet a = (a[0], a[1], a[2]) and b = (b[0], b[1], b[2])
@@ -22,14 +24,14 @@ def compare_triplets(a: tuple, b: tuple) -> list:
 
 def mini_max_sum(arr: list) -> tuple:
     arr = sorted(arr)  # if sorted, min is first n eles, max is last n eles
-    return sum(arr[0:len(arr)-1]), sum(arr[1:len(arr)])
+    return sum(arr[0:len(arr) - 1]), sum(arr[1:len(arr)])
 
 
 def birthday_cake_candles(candles: list) -> int:
     tallest = max(candles)
     count = 0
     candles.sort()
-    for i in range(len(candles)-1, -1, -1):
+    for i in range(len(candles) - 1, -1, -1):
         if candles[i] == tallest:
             count += 1
         else:
@@ -65,3 +67,39 @@ def grading_students(grades: list) -> list:
         if n - grade < 3:
             grades[i] = n
     return grades
+
+
+def forming_magic_square(s: list) -> int:
+    # Define magic square to be n*n matrix of distinct + integers from 1 to n^2
+    # where the sum of any row, column, or diag. of length n = same number; a
+    # "magic constant". Given a 3*3 matrix (s) of integers in range [1,9] (not
+    # necessarily a magic square).
+    #
+    # Can convert any digit a to another digit b in range [1,9] at cost |a-b|.
+    # Given s, convert it into a magic square at minimal cost.
+    s = s[0] + s[1] + s[2]  # reform to 1D
+    m = all_magic_squares_for_3_by_3()  # can be pre-computed
+    min_cost = None
+    for sq in m:
+        diff = 0
+        for i, j in zip(s, sq):
+            diff += abs(i - j)
+        if min_cost is None:
+            min_cost = diff
+        else:
+            min_cost = min(diff, min_cost)
+    return min_cost
+
+
+def library_fine(d1: int, m1: int, y1: int, d2: int, m2: int, y2: int) -> int:
+    # d1, m1, y1: returned date day, month and year, each an integer
+    # d2, m2, y2: due date day, month and year, each an integer
+    if y1 > y2:
+        return 10000  # fixed fine
+    elif y2 > y1:
+        return 0
+    if m1 > m2:
+        return 500 * (m1 - m2)
+    elif m2 > m1:
+        return 0
+    return 0 if d1 <= d2 else 15 * (d1 - d2)
