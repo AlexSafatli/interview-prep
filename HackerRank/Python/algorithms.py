@@ -1,9 +1,10 @@
+import typing
 import math
 
 from common import *
 
 
-def compare_triplets(a: tuple, b: tuple) -> list:
+def compare_triplets(a: tuple, b: tuple) -> typing.Tuple[int, int]:
     # Rating is a triplet a = (a[0], a[1], a[2]) and b = (b[0], b[1], b[2])
     # Find comparison points by comparing respective index values and:
     #   - if a[i] > b[i], a is awarded 1 point
@@ -19,12 +20,13 @@ def compare_triplets(a: tuple, b: tuple) -> list:
             rewards[0] += 1
         elif a[i] < b[i]:
             rewards[1] += 1
-    return rewards
+    return rewards[0], rewards[1]
 
 
 def mini_max_sum(arr: list) -> tuple:
+    n = len(arr)
     arr = sorted(arr)  # if sorted, min is first n eles, max is last n eles
-    return sum(arr[0:len(arr) - 1]), sum(arr[1:len(arr)])
+    return sum(arr[0:n - 1]), sum(arr[1:n])
 
 
 def birthday_cake_candles(candles: list) -> int:
@@ -103,3 +105,18 @@ def library_fine(d1: int, m1: int, y1: int, d2: int, m2: int, y2: int) -> int:
     elif m2 > m1:
         return 0
     return 0 if d1 <= d2 else 15 * (d1 - d2)
+
+
+def bon_appetit(bill: typing.List[int], k: int, b: int) -> int:
+    # When splitting a bill at dinner, each of two friends Anna/Brian will only
+    # pay for the items they consume. B gets the check and calculates A's part.
+    # You must determine if the calc is correct. For example, assume bill has
+    # the following prices: bill = [2, 4, 6]. Anna declines eating k = bill[2]
+    # which costs 6. If B calculates the bill correctly, A pays (2+4)/2 = 3.
+    # If he includes cost of bill[2], = 6 and should refund 3 to Anna.
+    #
+    # This function returns 0 (Bon Appetit) if bill is fairly split. Otherwise
+    # print aamounnt B owes A (the amount of which they paid was b).
+    f = sum(bill)
+    f -= bill[k]
+    return b - f // 2
