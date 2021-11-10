@@ -120,3 +120,38 @@ def bon_appetit(bill: typing.List[int], k: int, b: int) -> int:
     f = sum(bill)
     f -= bill[k]
     return b - f // 2
+
+
+def picking_numbers(a: typing.List[int]) -> int:
+    # Given array of integers (a), find longest subarray where abs diff b/w any
+    # two elements is <= 1.
+    #
+    # Example: a = [1,1,2,2,4,4,5,5,5]
+    # Two subarrays meet this: [1,1,2,2] and [4,4,5,5,5]. Maximum length is 5.
+    a = sorted(a)  # make sure array is sorted
+    if len(set(a)) == 1:
+        return len(a)  # check edge case where all elements are same
+    max_len = 0
+    start = 0
+    for i in range(0, len(a) - 1):
+        if abs(a[i + 1] - a[i]) > 1 or abs(a[i + 1] - a[start]) > 1:
+            if (i + 1 - start) > max_len:
+                max_len = i + 1 - start
+            start = i + 1
+    return max_len
+
+
+def save_the_prisoner(n: int, m: int, s: int) -> int:
+    # Jail has #/prisoners and #/treats to pass out. Jailer decides fairest way
+    # to divide treats is seat prisoners around circular table in sequentially
+    # numbered chairs. Chair number is drain from hat. Beginning with prisoner
+    # in that chair, one candy handed to each prisoner sequentially until all
+    # distributed. However, last piece of candy looks same but tastes awful.
+    # The chair number of that last person should be returned.
+    #
+    # n = number of prisoners
+    # m = number of sweets
+    # s = chair number to begin passing out sweets from
+    m %= n
+    ans = (m + s - 1) % n
+    return n if ans == 0 else ans
