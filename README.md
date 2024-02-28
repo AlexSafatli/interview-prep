@@ -28,7 +28,8 @@ other techniques outlined in respective `README` files.
   - **FEPSQ** (`./FEPSQ`) has code written in response to a blog article found online.
   - **HackerRank** (`./HackerRank`) code is for that website's challenges.
   - **InterviewCake** (`./InterviewCake`) code is for that website's challenges.
-  - **NLP** (`./NLP`) contains code from a *Advanced Topics in Natural Language Processing* course taken in university.
+  - **LeetCode** (`./LeetCode`) code is for that website's challenges.
+  - **NLP** (`./NLP`) contains code from *Advanced Topics in Natural Language Processing*, a course taken in university.
   - **TopCoder** (`./TopCoder`) contains code in response to challenges found on that website.
 
 ## Comment Notation
