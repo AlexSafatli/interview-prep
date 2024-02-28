@@ -57,7 +57,7 @@ func findMinPtr(nums []int) int {
 	return min
 }
 
-// Using min pointer, recursion - however, array could contain duplicates
+// Using min pointer, recursion - however, array could contain duplicates (154)
 func findMinRecDup(nums []int, l, r int, min *int) {
 	if l < 0 || r < 0 || r > len(nums)-1 {
 		return
