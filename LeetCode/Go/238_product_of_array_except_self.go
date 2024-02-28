@@ -7,13 +7,24 @@ import (
 	"time"
 )
 
-func productExceptSelf(nums []int) int {
-	// TODO
+func productExceptSelf(nums []int) []int {
+	n := len(nums)
+	a := make([]int, n)
+	a[0], a[n-1] = 1, 1
+	rightProd := 1
+	for i := 1; i < n; i++ {
+		a[i] = a[i-1] * nums[i-1]
+	}
+	for i := n - 2; i >= 0; i-- {
+		rightProd *= nums[i+1]
+		a[i] *= rightProd
+	}
+	return a
 }
 
 /* Test */
-func printProduceExceptSelfAns(nums []int, exp int) {
-	for _, f := range []func([]int) int{productExceptSelf} {
+func printProduceExceptSelfAns(nums []int, exp []int) {
+	for _, f := range []func([]int) []int{productExceptSelf} {
 		start := time.Now()
 		ans := f(nums)
 		end := time.Since(start)
