@@ -97,7 +97,7 @@ func findMinPtrDup(nums []int) int {
 }
 
 /* Test */
-func printRes(nums []int, exp int) {
+func printFindMinAns(nums []int, exp int) {
 	for _, f := range []func([]int) int{findMin, findMinPtr, findMinPtrDup} {
 		start := time.Now()
 		ans := f(nums)
@@ -108,9 +108,9 @@ func printRes(nums []int, exp int) {
 }
 
 func main() {
-	printRes([]int{3, 4, 5, 1, 2}, 1)
-	printRes([]int{4, 5, 6, 7, 0, 1, 2}, 0)
-	printRes([]int{11, 13, 15, 17}, 11)
-	printRes([]int{2, 2, 2, 0, 1}, 0)
-	printRes([]int{1, 1, 1, 1, 4, 0, 1}, 0)
+	printFindMinAns([]int{3, 4, 5, 1, 2}, 1)
+	printFindMinAns([]int{4, 5, 6, 7, 0, 1, 2}, 0)
+	printFindMinAns([]int{11, 13, 15, 17}, 11)
+	printFindMinAns([]int{2, 2, 2, 0, 1}, 0)
+	printFindMinAns([]int{1, 1, 1, 1, 4, 0, 1}, 0)
 }
