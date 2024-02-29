@@ -8,23 +8,23 @@ import (
 )
 
 // @SEE Algorithms, 4th Edition p. 228
-type DSU struct {
+type DisjointSet struct {
 	id    []int
 	sz    []int
 	count int
 }
 
-func NewDSU(n int) *DSU {
+func NewDisjointSet(n int) *DisjointSet {
 	parents := make([]int, n)
 	size := make([]int, n)
 	for i := range parents {
 		parents[i] = i
 		size[i] = 1
 	}
-	return &DSU{id: parents, sz: size, count: n}
+	return &DisjointSet{id: parents, sz: size, count: n}
 }
 
-func (d *DSU) find(p int) int {
+func (d *DisjointSet) find(p int) int {
 	for d.id[p] != p { // compress path for each node (makes MST)
 		d.id[p] = d.id[d.id[p]]
 		p = d.id[p]
@@ -32,7 +32,7 @@ func (d *DSU) find(p int) int {
 	return p
 }
 
-func (d *DSU) union(p, q int) {
+func (d *DisjointSet) union(p, q int) {
 	p, q = d.find(p), d.find(q)
 	if p == q {
 		return
@@ -48,7 +48,7 @@ func (d *DSU) union(p, q int) {
 
 func findCircleNum(isConnected [][]int) int {
 	n := len(isConnected)
-	d := NewDSU(n)
+	d := NewDisjointSet(n)
 	for a, connections := range isConnected {
 		for b, connected := range connections {
 			if connected == 1 {
