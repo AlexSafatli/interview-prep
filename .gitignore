@@ -8,6 +8,11 @@ __pycache__/
 # C extensions
 *.so
 
+# C# and Visual Studio files
+.vs
+bin/
+obj/
+
 # Java class files
 *.class
 
